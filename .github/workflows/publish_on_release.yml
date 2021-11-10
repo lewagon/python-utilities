@@ -1,4 +1,4 @@
-name: "Publish Package on Gemfury"
+name: "Build and Publish Package on Gemfury"
 
 on:
   release:
