@@ -146,9 +146,7 @@ def gh_api_repo_update(org, name, token):
 
 if __name__ == '__main__':
 
-    from wagon_myriad.github.auth import load_gh_token
-
-    gh_pat = load_gh_token()
+    gh_pat = "xxx"
 
     # gh_repo_rename(
     #     "lewagon-test/data-01-02-optional-01-olympic-winter-games",

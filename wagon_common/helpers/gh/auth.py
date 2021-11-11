@@ -29,9 +29,7 @@ def gh_auth(token, verbose=False):
 
 if __name__ == '__main__':
 
-    from wagon_myriad.github.auth import load_gh_token
-
-    gh_pat = load_gh_token()
+    gh_pat = "xxx"
 
     rc, output, error = gh_auth(gh_pat)
     print(rc, output, error)
