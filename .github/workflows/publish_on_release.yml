@@ -23,7 +23,7 @@ jobs:
         id: prep
         run: |
           BUILD_FILE=build.$(date +%Y-%m-%d-%H-%M).tgz
-          echo ::set-output name=build_path::${{github.workspace}}/${BUILD_FILE}
+          echo ::set-output name=build_path::$(find dist -name "wagon_common*.*gz")
           echo ::set-output name=build_name::${BUILD_FILE}
 
       - name: Save build as artifact
@@ -36,4 +36,4 @@ jobs:
       - name: Publish Package
         env:
           GEMFURY_PUSH_TOKEN: ${{ secrets.GEMFURY_PUSH_TOKEN }}
-        run: curl -F package=@dist/*.tgz https://${{ secrets.GEMFURY_PUSH_TOKEN }}@push.fury.io/ssaunier/
+        run: curl -F package=@${{ steps.prep.outputs.build_path }} https://${{ secrets.GEMFURY_PUSH_TOKEN }}@push.fury.io/ssaunier/
