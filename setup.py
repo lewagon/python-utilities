@@ -11,4 +11,5 @@ setup(name="wagon_common",
       author="Sébastien Saunier",
       author_email="seb@lewagon.org",
       packages=find_packages(),
+      include_package_data=True,  # use MANIFEST.in
       install_requires=requirements)
