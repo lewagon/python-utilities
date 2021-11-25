@@ -23,8 +23,8 @@ jobs:
         id: prep
         run: |
           BUILD_FILE=build.$(date +%Y-%m-%d-%H-%M).tgz
-          echo ::set-output name=build_path::$(find dist -name "wagon_common*.*gz")
           echo ::set-output name=build_name::${BUILD_FILE}
+          echo ::set-output name=build_path::$(ls -t dist/*gz | head -1)
 
       - name: Save build as artifact
         uses: actions/upload-artifact@v2

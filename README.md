@@ -1,8 +1,10 @@
 
 # install
 
+from gemfury with `~/.pip/pip.conf`:
+
 ``` bash
-pip install git+ssh://git@github.com/lewagon/utils.git#subdirectory=wagon_common
+pip install wagon_common
 ```
 
 # uninstall
