@@ -8,13 +8,12 @@ class AliasedGroup(click.Group):
         rv = click.Group.get_command(self, ctx, cmd_name)
         if rv is not None:
             return rv
-        matches = [x for x in self.list_commands(ctx)
-                   if x.startswith(cmd_name)]
-        if not matches:
+        commands = [cmd for cmd in self.list_commands(ctx) if cmd.startswith(cmd_name)]
+        if not commands:
             return None
-        elif len(matches) == 1:
-            return click.Group.get_command(self, ctx, matches[0])
-        ctx.fail(f"Too many matches: {', '.join(sorted(matches))}")
+        elif len(commands) == 1:
+            return click.Group.get_command(self, ctx, commands[0])
+        ctx.fail(f"Too many commands match the alias: {', '.join(sorted(commands))}")
 
     def resolve_command(self, ctx, args):
         # always return the full command name
