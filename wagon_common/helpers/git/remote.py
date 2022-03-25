@@ -59,8 +59,8 @@ def git_remote_get_url(path, name, verbose=False):
 
 def git_remote_get_probable_url(path, gnn, verbose=False):
     """
-    return most probable repo remote url source
-    match github nickname if there are several remotes
+    retrieve the first repo remote url matching the provided github nickname
+    or the last remote url if there are no matches
     """
 
     # retrieve remote list
