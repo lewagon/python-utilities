@@ -48,7 +48,7 @@ class TestRemotes():
         # Arrange
 
         # Act
-        url = git_remote_get_probable_url(path=".", gnn="lewagon")
+        url = git_remote_get_probable_url(path=".", gh_nickname="lewagon")
 
         print(f"\nremote probable url:\n- {url=}")
 
