@@ -57,7 +57,7 @@ def git_remote_get_url(path, name, verbose=False):
     return remote_url
 
 
-def git_remote_get_probable_url(path, gnn, verbose=False):
+def git_remote_get_probable_url(path, gh_nickname, verbose=False):
     """
     retrieve the first repo remote url matching the provided github nickname
     or the last remote url if there are no matches
