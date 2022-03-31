@@ -78,7 +78,7 @@ def git_remote_get_probable_url(path, gh_nickname, verbose=False):
         potential_url = git_remote_get_url(
             path=path, name=potential_remote, verbose=verbose)
 
-        if gnn in potential_url:
+        if gh_nickname in potential_url:
             remote_url = potential_url
             break
 
