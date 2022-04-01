@@ -151,8 +151,3 @@ if __name__ == '__main__':
 
     assert data_solutions.url == "https://git@github.com/lewagon/data-solutions"
     assert authed_data_so.url == "https://user:token@github.com/lewagon/data-solutions"
-
-    data_cha = GitHubRepo.from_url("https://github.com/lewagon/data-challenges.git")
-
-    assert data_cha.org == "lewagon"
-    assert data_cha.repo == "data-challenges"
