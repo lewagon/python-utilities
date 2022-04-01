@@ -34,6 +34,15 @@ class GitHubRepo:
 
         return cls(org, repo)
 
+    def to_url(self):
+        return f"https://github.com/{self.org}/{self.repo}"
+
+    def to_clone_url(self):
+        return f"https://github.com/{self.org}/{self.repo}.git"
+
+    def to_clone_ssh(self):
+        return f"git@github.com:{self.org}/{self.repo}.git"
+
     def clone(self, path, verbose=False):
 
         if os.path.isdir(path):
