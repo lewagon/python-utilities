@@ -53,6 +53,6 @@ class TestRemotes():
         print(f"\nremote probable url:\n- {url=}")
 
         # Assert
-        assert True
+        assert url == "git@github.com:lewagon/python-utilities.git"
 
         # Cleanup

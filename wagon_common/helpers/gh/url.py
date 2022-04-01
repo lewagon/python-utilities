@@ -34,6 +34,15 @@ class GitHubRepo:
 
         return cls(org, repo)
 
+    def to_url(self):
+        return f"https://github.com/{self.org}/{self.repo}"
+
+    def to_clone_url(self):
+        return f"https://github.com/{self.org}/{self.repo}.git"
+
+    def to_clone_ssh(self):
+        return f"git@github.com:{self.org}/{self.repo}.git"
+
     def clone(self, path, verbose=False):
 
         if os.path.isdir(path):
@@ -119,31 +128,5 @@ def extract_gnn_repo_from_github_url(url):
 
 if __name__ == '__main__':
 
-    def test(url):
-
-        res = extract_gnn_repo_from_github_url(url)
-
-        print(url, res)
-
-        assert res == ("github_nickname", "repo-name")
-
-    test("git@github.com:github_nickname/repo-name.git")
-    test("https://github.com/github_nickname/repo-name.git")
-    test("http://github.com/github_nickname/repo-name.git")
-    test("git@github.com:github_nickname/repo-name")
-    test("https://github.com/github_nickname/repo-name")
-    test("http://github.com/github_nickname/repo-name")
-
     print(github_url("lewagon/setup"))
     print(github_url("lewagon/setup", "gnn", "token"))
-
-    data_solutions = GitHubRepo("lewagon", "data-solutions")
-    authed_data_so = GitHubRepo("lewagon", "data-solutions", "user", "token")
-
-    assert data_solutions.url == "https://git@github.com/lewagon/data-solutions"
-    assert authed_data_so.url == "https://user:token@github.com/lewagon/data-solutions"
-
-    data_cha = GitHubRepo.from_url("https://github.com/lewagon/data-challenges.git")
-
-    assert data_cha.org == "lewagon"
-    assert data_cha.repo == "data-challenges"
