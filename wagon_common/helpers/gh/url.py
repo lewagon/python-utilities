@@ -128,20 +128,5 @@ def extract_gnn_repo_from_github_url(url):
 
 if __name__ == '__main__':
 
-    def test(url):
-
-        res = extract_gnn_repo_from_github_url(url)
-
-        print(url, res)
-
-        assert res == ("github_nickname", "repo-name")
-
-    test("git@github.com:github_nickname/repo-name.git")
-    test("https://github.com/github_nickname/repo-name.git")
-    test("http://github.com/github_nickname/repo-name.git")
-    test("git@github.com:github_nickname/repo-name")
-    test("https://github.com/github_nickname/repo-name")
-    test("http://github.com/github_nickname/repo-name")
-
     print(github_url("lewagon/setup"))
     print(github_url("lewagon/setup", "gnn", "token"))
