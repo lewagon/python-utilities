@@ -145,9 +145,3 @@ if __name__ == '__main__':
 
     print(github_url("lewagon/setup"))
     print(github_url("lewagon/setup", "gnn", "token"))
-
-    data_solutions = GitHubRepo("lewagon", "data-solutions")
-    authed_data_so = GitHubRepo("lewagon", "data-solutions", "user", "token")
-
-    assert data_solutions.url == "https://git@github.com/lewagon/data-solutions"
-    assert authed_data_so.url == "https://user:token@github.com/lewagon/data-solutions"

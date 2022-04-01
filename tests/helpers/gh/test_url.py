@@ -35,3 +35,27 @@ class TestGitHubRepo():
         assert repo_clone_ssh == "git@github.com:lewagon/data-challenges.git"
 
         # Cleanup
+
+    def test_repo_creation(self):
+
+        # Arrange
+        data_solutions = GitHubRepo("lewagon", "data-solutions")
+
+        # Act
+
+        # Assert
+        assert data_solutions.url == "https://git@github.com/lewagon/data-solutions"
+
+        # Cleanup
+
+    def test_repo_creation_auth(self):
+
+        # Arrange
+        authed_data_so = GitHubRepo("lewagon", "data-solutions", "user", "token")
+
+        # Act
+
+        # Assert
+        assert authed_data_so.url == "https://user:token@github.com/lewagon/data-solutions"
+
+        # Cleanup
