@@ -1,4 +1,10 @@
 
+# 0.2.5 (2022-04-01)
+
+### Updated
+
+- Updates `git_remote_get_probable_url` to return ssh clone address format
+
 # 0.2.4 (2022-03-25)
 
 ### Added
