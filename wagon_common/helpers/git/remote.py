@@ -2,6 +2,8 @@
 git remote cli helpers
 """
 
+from wagon_common.helpers.gh.url import GitHubRepo
+
 from wagon_common.helpers.subprocess import run_command
 
 
@@ -86,7 +88,10 @@ def git_remote_get_probable_url(path, gh_nickname, verbose=False):
     if not remote_url:
         remote_url = potential_url
 
-    return remote_url
+    # convert to ssh clone address
+    clone_ssh_addess = GitHubRepo.from_url(remote_url).to_clone_ssh()
+
+    return clone_ssh_addess
 
 
 def git_remote_add(path, name, url, verbose=False):
