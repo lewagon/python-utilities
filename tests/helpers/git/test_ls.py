@@ -7,6 +7,12 @@ import os
 
 class TestHelperGitLs():
 
+    expected_md = [
+        "CHANGELOG.md",
+        "README.md",
+        os.path.join("doc", "TESTS.md"),
+        os.path.join("tests", "data", "test.md")]
+
     def test_git_ls_markdown(self):
 
         # Arrange
@@ -15,10 +21,7 @@ class TestHelperGitLs():
         files = list_git_controlled_files(["*.md"])
 
         # Assert
-        excpected_md = [
-            "CHANGELOG.md", "README.md", "doc/TESTS.md", "tests/data/test.md"]
-
-        assert files == excpected_md
+        assert files == self.expected_md
 
         # Cleanup
 
@@ -31,9 +34,7 @@ class TestHelperGitLs():
         files = list_git_controlled_files(["*.md"])
 
         # Assert
-        excpected_md = ["CHANGELOG.md", "README.md", "doc/TESTS.md"]
-
-        assert files == excpected_md
+        assert files == self.expected_md[:3]
 
         # Cleanup
         self.__git_restore_file("tests/data/test.md")
@@ -47,10 +48,7 @@ class TestHelperGitLs():
         files = list_git_controlled_files(["*.md"], include_deleted=True)
 
         # Assert
-        excpected_md = [
-            "CHANGELOG.md", "README.md", "doc/TESTS.md", "tests/data/test.md"]
-
-        assert files == excpected_md
+        assert files == self.expected_md
 
         # Cleanup
         self.__git_restore_file("tests/data/test.md")
@@ -69,3 +67,17 @@ class TestHelperGitLs():
             ] + [file]
 
         _rc, output, _error = run_command(command)
+
+    def test_git_ls_outside(self):
+
+        # Arrange
+
+        # Act
+        files = list_git_controlled_files(["../*.md"])
+
+        # Assert
+        expected_md = []
+
+        assert files == expected_md
+
+        # Cleanup
