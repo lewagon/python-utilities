@@ -17,6 +17,11 @@ class Scope:
         # retrieve the git repo in which the command was ran
         self.repo = GitRepo(self.cwd)
 
+    def filter_git_files(self, include_deleted=False):
+
+        self.sources = self.repo.ls_files(
+            self.sources, include_deleted=include_deleted)
+
     @classmethod
     def from_sources(cls, sources, verbose=False):
 

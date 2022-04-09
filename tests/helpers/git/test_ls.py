@@ -1,11 +1,11 @@
 
 from wagon_common.helpers.git.ls import list_git_controlled_files
-from wagon_common.helpers.subprocess import run_command
+from tests.base import GitTestBase
 
 import os
 
 
-class TestHelperGitLs():
+class TestHelperGitLs(GitTestBase):
 
     expected_md = [
         "CHANGELOG.md",
@@ -28,7 +28,7 @@ class TestHelperGitLs():
     def test_git_ls_deleted_markdown(self):
 
         # Arrange
-        self.__git_delete_file("tests/data/test.md")
+        self.delete_file("tests/data/test.md")
 
         # Act
         files = list_git_controlled_files(["*.md"])
@@ -37,12 +37,12 @@ class TestHelperGitLs():
         assert files == self.expected_md[:3]
 
         # Cleanup
-        self.__git_restore_file("tests/data/test.md")
+        self.git_restore_file("tests/data/test.md")
 
     def test_git_ls_deleted_markdown_with(self):
 
         # Arrange
-        self.__git_delete_file("tests/data/test.md")
+        self.delete_file("tests/data/test.md")
 
         # Act
         files = list_git_controlled_files(["*.md"], include_deleted=True)
@@ -51,22 +51,7 @@ class TestHelperGitLs():
         assert files == self.expected_md
 
         # Cleanup
-        self.__git_restore_file("tests/data/test.md")
-
-    def __git_delete_file(self, file):
-
-        # retrieve git controlled files
-        os.remove(file)
-
-    def __git_restore_file(self, file):
-
-        # restore file
-        command = [
-            "git",
-            "restore",
-            ] + [file]
-
-        _rc, output, _error = run_command(command)
+        self.git_restore_file("tests/data/test.md")
 
     def test_git_ls_outside(self):
 
