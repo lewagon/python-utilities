@@ -81,3 +81,18 @@ class TestHelperGitLs():
         assert files == expected_md
 
         # Cleanup
+
+    # def test_git_ls_other_repo(self):
+
+    #     # Arrange
+
+    #     # Act
+    #     repo_path = os.path.join("..", "data-challenges")
+    #     files = list_git_controlled_files([".gitignore"], path=repo_path, verbose=True)
+
+    #     # Assert
+    #     expected_md = [".gitignore"]
+
+    #     assert files == expected_md
+
+    #     # Cleanup
