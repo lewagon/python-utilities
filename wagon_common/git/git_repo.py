@@ -23,5 +23,8 @@ class GitRepo:
 
 if __name__ == '__main__':
 
-    repo = GitRepo(__file__)
+    repo = GitRepo(__file__, verbose=True)
+    repo.tld
+    repo.tld
+    repo.tld
     print(f"repo tld: {repo.tld=}")
