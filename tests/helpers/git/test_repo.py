@@ -4,7 +4,7 @@ from wagon_common.helpers.git.repo import get_git_top_level_directory
 import os
 
 
-class TestGitRepoTLD():
+class TestHelperGitRepoTLD():
 
     repo_tld = os.path.normpath(os.path.join(
         os.path.dirname(__file__), "..", "..", ".."))
