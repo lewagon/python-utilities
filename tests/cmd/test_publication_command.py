@@ -23,7 +23,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
         # Act
         def act():
 
-            scope = Scope([
+            scope = Scope.from_sources([
                 os.path.join(self.source_root, "07", "04", "01", "in_scope.py"),
                 os.path.join(self.source_root, "04", "*.py")])
 
@@ -48,7 +48,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
         # Act
         def act():
 
-            scope = Scope([
+            scope = Scope.from_sources([
                 os.path.join(self.source_root, "07", "04", "01", "in_scope.py"),
                 os.path.join(self.source_root, "04", "*.py")])
 
@@ -75,7 +75,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
         # Act
         def act():
 
-            scope = Scope([
+            scope = Scope.from_sources([
                 os.path.join(self.source_root, "07", "04", "01", "in_scope.py"),
                 os.path.join(self.source_root, "04", "*.py")])
 
@@ -101,7 +101,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
         # Act
         def act():
 
-            scope = Scope([
+            scope = Scope.from_sources([
                 os.path.join(self.source_root, "07", "04", "01", "in_scope.py"),
                 os.path.join(self.source_root, "04", "*.py")])
 
