@@ -1,8 +1,9 @@
 
-# 0.2.6 (2022-04-09)
+# 0.2.6 (2022-04-17)
 
 ### Added
 
+- Adds `are_directories_identical` test helper and `TestBaseDirectoryEquality` test base class + tests for both
 - Adds `GitRepo` and `Scope` classes with tests
 
 # 0.2.5 (2022-04-01)
