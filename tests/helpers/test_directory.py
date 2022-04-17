@@ -1,5 +1,5 @@
 
-from tests.base.directory_equality import TestBaseDirectoryEquality
+from wagon_common.tests.base.directory_equality import TestBaseDirectoryEquality
 
 from wagon_common.helpers.file import cp
 

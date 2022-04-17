@@ -9,8 +9,9 @@ import shutil
 
 class TestBaseDirectoryEquality():
 
+    # only valid for the wagon_common package
     tests_root = os.path.normpath(os.path.join(
-        os.path.dirname(__file__), "..", "data"))
+        os.path.dirname(__file__), "..", "..", "..", "tests", "data"))
 
     def run_test_directory_identical(self, test_data_root, act_function, equal=True):
 
