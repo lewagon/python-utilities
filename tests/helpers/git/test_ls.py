@@ -7,18 +7,24 @@ import os
 
 class TestHelperGitLs(GitTestBase):
 
+    test_pattern = [
+        "./CHANGELOG.md",
+        "./README.md",
+        "doc/*.md",
+        "tests/data/ls/*.md"]
+
     expected_md = [
         "CHANGELOG.md",
         "README.md",
         os.path.join("doc", "TESTS.md"),
-        os.path.join("tests", "data", "test.md")]
+        os.path.join("tests", "data", "ls", "test.md")]
 
     def test_git_ls_markdown(self):
 
         # Arrange
 
         # Act
-        files = list_git_controlled_files(["*.md"])
+        files = list_git_controlled_files(self.test_pattern)
 
         # Assert
         assert files == self.expected_md
@@ -28,30 +34,30 @@ class TestHelperGitLs(GitTestBase):
     def test_git_ls_deleted_markdown(self):
 
         # Arrange
-        self.delete_file("tests/data/test.md")
+        self.delete_file("tests/data/ls/test.md")
 
         # Act
-        files = list_git_controlled_files(["*.md"])
+        files = list_git_controlled_files(self.test_pattern)
 
         # Assert
         assert files == self.expected_md[:3]
 
         # Cleanup
-        self.git_restore_file("tests/data/test.md")
+        self.git_restore_file("tests/data/ls/test.md")
 
     def test_git_ls_deleted_markdown_with(self):
 
         # Arrange
-        self.delete_file("tests/data/test.md")
+        self.delete_file("tests/data/ls/test.md")
 
         # Act
-        files = list_git_controlled_files(["*.md"], include_deleted=True)
+        files = list_git_controlled_files(self.test_pattern, include_deleted=True)
 
         # Assert
         assert files == self.expected_md
 
         # Cleanup
-        self.git_restore_file("tests/data/test.md")
+        self.git_restore_file("tests/data/ls/test.md")
 
     def test_git_ls_outside(self):
 
