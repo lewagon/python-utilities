@@ -11,6 +11,8 @@ pytest -s tests/helpers/test_directory.py
 pytest -s tests/helpers/git
 pytest -s tests/helpers/git/test_ls.py
 pytest -s tests/helpers/git/test_repo.py
+pytest -s tests/path
+pytest -s tests/path/test_scope.py
 ```
 
 ## functional tests
