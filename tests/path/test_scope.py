@@ -46,16 +46,16 @@ class TestScope(GitTestBase):
         # Cleanup
         self.delete_file("remove_me.md")
 
-    def test_scope_git_filter_ignore(self):
+    # def test_scope_git_filter_ignore(self):
 
-        # Arrange
+    #     # Arrange
 
-        # Act
-        scope = Scope.from_sources(self.test_pattern)
-        scope.filter_git_files()
-        scope.filter_ignored_files()
+    #     # Act
+    #     scope = Scope.from_sources(self.test_pattern)
+    #     scope.filter_git_files()
+    #     scope.filter_ignored_files()
 
-        # Assert
-        assert scope.sources == self.expected_md
+    #     # Assert
+    #     assert scope.sources == self.expected_md
 
-        # Cleanup
+    #     # Cleanup
