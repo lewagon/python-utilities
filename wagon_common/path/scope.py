@@ -1,3 +1,7 @@
+"""
+handles a subset of tree structure passed as an argument to a command
+files in a scope should belong to a single git repository
+"""
 
 from wagon_common.git.git_repo import GitRepo
 
