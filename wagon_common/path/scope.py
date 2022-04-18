@@ -1,6 +1,6 @@
 """
-handles a subset of tree structure passed as an argument to a command
-files in a scope should belong to a single git repository
+handles a subset of tree structure passed as an argument
+to a command ran in a git repository
 """
 
 from wagon_common.git.git_repo import GitRepo
