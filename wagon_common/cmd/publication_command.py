@@ -30,7 +30,9 @@ class PublicationCommand:
             print(Fore.BLUE
                   + "\nProcess files:"
                   + Style.RESET_ALL
-                  + f"\n- from cwd: {scope.cwd}")
+                  + f"\n- from cwd: {scope.cwd}"
+                  + f"\n- command root: {command_root}"
+                  + f"\n- target root: {target_root}")
 
         # iterate through scope files
         for source in scope:
@@ -84,10 +86,12 @@ class PublicationCommand:
             if processed_source[:2] == "..":
 
                 print(Fore.RED
-                      + "\nFile in scope outside of provided command roor 🤕"
+                      + "\nFile in scope outside of provided command root 🤕"
                       + Style.RESET_ALL
                       + f"\n- source file: {processed_source}"
                       + f"\n- command root: {command_root}")
+
+                raise Exception("File in scope outside of repo")
 
         # process target root
         if target_root is None:
