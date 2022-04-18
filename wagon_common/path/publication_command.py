@@ -1,5 +1,5 @@
 """
-resolves the destinations for the sources in the scope
+resolves the command destination for each source in the scope
 runs the command on each source
 """
 
