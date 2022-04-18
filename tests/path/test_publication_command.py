@@ -17,8 +17,8 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
 
     def test_publication_command_publish(self):
         """
-        source: /path/project/  command/root/   content/path
-        target: /path/target/   target/root/    content/path
+        source: /path/project/                  content/path
+        target: /path/target/                   content/path
         """
 
         # Arrange
@@ -45,7 +45,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
     def test_publication_command_command_root(self):
         """
         source: /path/project/  command/root/   content/path
-        target: /path/target/   target/root/    content/path
+        target: /path/target/                   content/path
         """
 
         # Arrange
@@ -74,7 +74,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
 
     def test_publication_command_target_root(self):
         """
-        source: /path/project/  command/root/   content/path
+        source: /path/project/                  content/path
         target: /path/target/   target/root/    content/path
         """
 
