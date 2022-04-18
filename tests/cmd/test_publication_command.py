@@ -55,3 +55,32 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
             os.path.join(self.tests_root, "publish"), act)
 
         # Cleanup
+
+    def test_publication_command_command_root(self):
+        """
+        source: /path/project/  command/root/   content/path
+        target: /path/target/   target/root/    content/path
+        """
+
+        # Arrange
+
+        # Act
+        def act():
+
+            sources = [
+                os.path.join(self.source_root, "command", "root", "07", "04", "01", "in_scope.py"),
+                os.path.join(self.source_root, "command", "root", "04", "**", "*.py")]
+
+            scope = Scope.from_sources(self.__glob(sources))
+
+            PublicationCommand().run(
+                scope=scope,
+                target_tld=self.processed_root,
+                command_root=os.path.join("command", "root"),
+                verbose=True)
+
+        # Assert
+        self.run_test_directory_identical(
+            os.path.join(self.tests_root, "command"), act)
+
+        # Cleanup
