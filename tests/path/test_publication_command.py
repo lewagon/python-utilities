@@ -1,5 +1,5 @@
 
-from wagon_common.cmd.publication_command import PublicationCommand
+from wagon_common.path.publication_command import PublicationCommand
 from wagon_common.path.scope import Scope
 
 from wagon_common.tests.base.directory_equality import TestBaseDirectoryEquality
