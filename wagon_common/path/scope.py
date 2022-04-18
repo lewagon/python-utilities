@@ -5,6 +5,8 @@ to a command ran in a git repository
 
 from wagon_common.git.git_repo import GitRepo
 
+from wagon_common.helpers.output import print_files
+
 from functools import cached_property
 import os
 
@@ -23,8 +25,18 @@ class Scope:
 
     def filter_git_files(self, include_deleted=False):
 
-        self.sources = self.repo.ls_files(
+        # retrieve git handled files in the scope
+        git_files = self.repo.ls_files(
             self.sources, include_deleted=include_deleted)
+
+        if self.verbose:
+
+            # list files not handled by git (or oustide of the repo)
+            git_unhandled = set(self.sources) - set(git_files)
+
+            print_files("red", "Files not handled by git", git_unhandled)
+
+        self.sources = git_files
 
         if not self.sources:
 
