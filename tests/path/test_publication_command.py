@@ -11,7 +11,7 @@ import glob
 class TestPublicationCommand(TestBaseDirectoryEquality):
 
     tests_root = os.path.normpath(os.path.join(
-        os.path.dirname(__file__), "..", "data", "functional"))
+        os.path.dirname(__file__), "..", "data", "functional", "publication_command"))
 
     cwd = os.getcwd()
 
