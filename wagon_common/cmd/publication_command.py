@@ -1,3 +1,7 @@
+"""
+resolves the destinations for the sources in the scope
+runs the command on each source
+"""
 
 from wagon_common.helpers.file import cp
 from wagon_common.helpers.output import print_files
