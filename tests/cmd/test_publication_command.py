@@ -13,6 +13,21 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
     tests_root = os.path.normpath(os.path.join(
         os.path.dirname(__file__), "..", "data", "functional"))
 
+    cwd = os.getcwd()
+
+    def __glob(self, sources):
+
+        globbed = []
+
+        # iterate through sources
+        for source in sources:
+            for resolved in glob.glob(source, recursive=True):
+                relative = os.path.relpath(
+                    resolved, start=self.cwd)
+                globbed.append(relative)
+
+        return globbed
+
     def test_publication_command_publish(self):
         """
         source: /path/project/  command/root/   content/path
@@ -28,13 +43,12 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
                 os.path.join(self.source_root, "07", "04", "01", "in_scope.py"),
                 os.path.join(self.source_root, "04", "**", "*.py")]
 
-            globbed = [r for s in sources for r in glob.glob(s, recursive=True)]
-
-            scope = Scope.from_sources(globbed)
+            scope = Scope.from_sources(self.__glob(sources))
 
             PublicationCommand().run(
                 scope=scope,
-                target_tld=self.processed_root)
+                target_tld=self.processed_root,
+                verbose=True)
 
         # Assert
         self.run_test_directory_identical(
