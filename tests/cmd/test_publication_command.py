@@ -67,16 +67,17 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
         # Act
         def act():
 
+            command_root = os.path.join(self.source_root, "command", "root")
             sources = [
-                os.path.join(self.source_root, "command", "root", "07", "04", "01", "in_scope.py"),
-                os.path.join(self.source_root, "command", "root", "04", "**", "*.py")]
+                os.path.join(command_root, "07", "04", "01", "in_scope.py"),
+                os.path.join(command_root, "04", "**", "*.py")]
 
             scope = Scope.from_sources(self.__glob(sources))
 
             PublicationCommand().run(
                 scope=scope,
                 target_tld=self.processed_root,
-                command_root=os.path.join("command", "root"),
+                command_root=command_root,
                 verbose=True)
 
         # Assert
