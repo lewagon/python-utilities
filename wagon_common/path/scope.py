@@ -42,6 +42,27 @@ class Scope:
     def cwd(self):
         return os.getcwd()
 
+    def __iter__(self):
+        """
+        iterator initializer
+        """
+
+        self.iterated_position = -1
+        return self
+
+    def __next__(self):
+        """
+        iterator increment
+        """
+
+        self.iterated_position += 1
+
+        if self.iterated_position < len(self.sources):
+            result = self.sources[self.iterated_position]
+            return result
+        else:
+            raise StopIteration
+
 
 if __name__ == '__main__':
 
