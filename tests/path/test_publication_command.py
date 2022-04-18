@@ -47,8 +47,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
 
             PublicationCommand().run(
                 scope=scope,
-                target_tld=self.processed_root,
-                verbose=True)
+                target_tld=self.processed_root)
 
         # Assert
         self.run_test_directory_identical(
@@ -78,8 +77,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
             PublicationCommand().run(
                 scope=scope,
                 target_tld=self.processed_root,
-                command_root=command_root,
-                verbose=True)
+                command_root=command_root)
 
         # Assert
         self.run_test_directory_identical(
@@ -107,8 +105,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
             PublicationCommand().run(
                 scope=scope,
                 target_tld=self.processed_root,
-                target_root=os.path.join("target", "root"),
-                verbose=True)
+                target_root=os.path.join("target", "root"))
 
         # Assert
         self.run_test_directory_identical(
