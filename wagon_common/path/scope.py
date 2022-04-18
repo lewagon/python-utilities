@@ -22,6 +22,13 @@ class Scope:
         self.sources = self.repo.ls_files(
             self.sources, include_deleted=include_deleted)
 
+        if not self.sources:
+
+            print(Fore.RED
+                  + "\nNo files controlled by git in the scope 😶‍🌫️"
+                  + Style.RESET_ALL
+                  + "\nPlease make sure to `git add` any files that you want to use")
+
     @classmethod
     def from_sources(cls, sources, verbose=False):
 
