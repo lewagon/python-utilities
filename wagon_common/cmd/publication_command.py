@@ -1,5 +1,6 @@
 
 from wagon_common.helpers.file import cp
+from wagon_common.helpers.output import print_files
 
 import os
 
@@ -8,11 +9,28 @@ from colorama import Fore, Style
 
 class PublicationCommand:
 
-    def run(self, scope, target_tld, command_root=None, target_root=None):
+    def run(self, scope, target_tld, command_root=None, target_root=None, verbose=False):
+
+        if verbose:
+            print_files("blue", "Files in scope", scope)
 
         # process tld relative target
-        abs_target_tld = os.path.normpath(os.path.join(
+        abs_target_tld = os.path.relpath(os.path.join(
             scope.repo.tld, target_tld))
+
+        if verbose:
+            print(Fore.BLUE
+                  + "\nResolved target tld:"
+                  + Style.RESET_ALL
+                  + f"\n- source repo tld: {scope.repo.tld}"
+                  + f"\n- target tld: {target_tld}"
+                  + f"\n- resolved target tld: {abs_target_tld}")
+
+        if verbose:
+            print(Fore.BLUE
+                  + "\nProcess files:"
+                  + Style.RESET_ALL
+                  + f"\n- from cwd: {scope.cwd}")
 
         # iterate through scope files
         for source in scope:
@@ -27,6 +45,9 @@ class PublicationCommand:
                 target_tld=abs_target_tld,
                 command_root=command_root,
                 target_root=target_root)
+
+            if verbose:
+                print(f"- {source}: {destination}")
 
             # run transformation
             self.__transform(source, destination)
