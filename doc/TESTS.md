@@ -4,6 +4,8 @@
 ### git
 
 ``` bash
+pytest -s tests/cmd
+pytest -s tests/cmd/test_publication_command.py
 pytest -s tests/git
 pytest -s tests/git/test_git_repo_tld.py
 pytest -s tests/helpers
