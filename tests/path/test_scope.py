@@ -13,21 +13,21 @@ class TestScope(GitTestBase):
         "./CHANGELOG.md",
         "./README.md",
         "doc/*.md",
-        "tests/data/ls/**/*.md"]
+        "tests/data/functional/scope/**/*.md"]
 
     expected_md = [
         "CHANGELOG.md",
         "README.md",
         os.path.join("doc", "TESTS.md"),
-        os.path.join("tests", "data", "ls", "archive", "old.md"),
-        os.path.join("tests", "data", "ls", "test.md"),
-        os.path.join("tests", "data", "ls", "wip.md")]
+        os.path.join("tests", "data", "functional", "scope", "archive", "old.md"),
+        os.path.join("tests", "data", "functional", "scope", "content.md"),
+        os.path.join("tests", "data", "functional", "scope", "wip.md")]
 
     expected_ignored_files_md = [
         "CHANGELOG.md",
         "README.md",
         os.path.join("doc", "TESTS.md"),
-        os.path.join("tests", "data", "ls", "test.md")]
+        os.path.join("tests", "data", "functional", "scope", "content.md")]
 
     cwd = os.getcwd()
 
@@ -57,3 +57,16 @@ class TestScope(GitTestBase):
 
         # Cleanup
         self.delete_file(os.path.join("doc", "remove_me.md"))
+
+    def test_scope_ignore_patterns(self):
+
+        # Arrange
+
+        # Act
+        scope = Scope.from_sources(glob_sources(self.test_pattern, self.cwd), verbose=True)
+        scope.filter_ignored_patterns(["wip", "archive"])
+
+        # Assert
+        assert scope.sources == self.expected_ignored_files_md
+
+        # Cleanup

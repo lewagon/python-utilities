@@ -5,6 +5,9 @@ to a command ran in a git repository
 
 from wagon_common.git.git_repo import GitRepo
 
+from wagon_sync.helpers.filter import (
+    list_files_matching_dirs,
+    list_files_matching_pattern)
 from wagon_common.helpers.output import print_files
 
 from functools import cached_property
@@ -44,6 +47,15 @@ class Scope:
                   + "\nNo files controlled by git in the scope 😶‍🌫️"
                   + Style.RESET_ALL
                   + "\nPlease make sure to `git add` any files that you want to use")
+
+    def filter_ignored_patterns(self, patterns):
+
+        # exclude files matching unsynced pattern
+        excluded_files = list_files_matching_pattern(self.sources, patterns)
+        self.sources = sorted(set(self.sources) - set(excluded_files))
+
+        if self.verbose:
+            print_files("red", f"Files excluded by {patterns} pattern", excluded_files)
 
     @classmethod
     def from_sources(cls, sources, verbose=False):
