@@ -13,9 +13,17 @@ class TestScope(GitTestBase):
         "./CHANGELOG.md",
         "./README.md",
         "doc/*.md",
-        "tests/data/ls/*.md"]
+        "tests/data/ls/**/*.md"]
 
     expected_md = [
+        "CHANGELOG.md",
+        "README.md",
+        os.path.join("doc", "TESTS.md"),
+        os.path.join("tests", "data", "ls", "archive", "old.md"),
+        os.path.join("tests", "data", "ls", "test.md"),
+        os.path.join("tests", "data", "ls", "wip.md")]
+
+    expected_ignored_files_md = [
         "CHANGELOG.md",
         "README.md",
         os.path.join("doc", "TESTS.md"),
