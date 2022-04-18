@@ -3,9 +3,9 @@ from wagon_common.path.publication_command import PublicationCommand
 from wagon_common.path.scope import Scope
 
 from wagon_common.tests.base.directory_equality import TestBaseDirectoryEquality
+from wagon_common.tests.base.glob import glob_sources
 
 import os
-import glob
 
 
 class TestPublicationCommand(TestBaseDirectoryEquality):
@@ -14,19 +14,6 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
         os.path.dirname(__file__), "..", "data", "functional", "publication_command"))
 
     cwd = os.getcwd()
-
-    def __glob(self, sources):
-
-        globbed = []
-
-        # iterate through sources
-        for source in sources:
-            for resolved in glob.glob(source, recursive=True):
-                relative = os.path.relpath(
-                    resolved, start=self.cwd)
-                globbed.append(relative)
-
-        return globbed
 
     def test_publication_command_publish(self):
         """
@@ -43,7 +30,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
                 os.path.join(self.source_root, "07", "04", "01", "in_scope.py"),
                 os.path.join(self.source_root, "04", "**", "*.py")]
 
-            scope = Scope.from_sources(self.__glob(sources))
+            scope = Scope.from_sources(glob_sources(sources, self.cwd))
 
             PublicationCommand().run(
                 scope=scope,
@@ -72,7 +59,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
                 os.path.join(command_root, "07", "04", "01", "in_scope.py"),
                 os.path.join(command_root, "04", "**", "*.py")]
 
-            scope = Scope.from_sources(self.__glob(sources))
+            scope = Scope.from_sources(glob_sources(sources, self.cwd))
 
             PublicationCommand().run(
                 scope=scope,
@@ -100,7 +87,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
                 os.path.join(self.source_root, "07", "04", "01", "in_scope.py"),
                 os.path.join(self.source_root, "04", "**", "*.py")]
 
-            scope = Scope.from_sources(self.__glob(sources))
+            scope = Scope.from_sources(glob_sources(sources, self.cwd))
 
             PublicationCommand().run(
                 scope=scope,
@@ -130,7 +117,7 @@ class TestPublicationCommand(TestBaseDirectoryEquality):
                 os.path.join(command_root, "07", "04", "01", "in_scope.py"),
                 os.path.join(command_root, "04", "**", "*.py")]
 
-            scope = Scope.from_sources(self.__glob(sources))
+            scope = Scope.from_sources(glob_sources(sources, self.cwd))
 
             PublicationCommand().run(
                 scope=scope,
