@@ -5,7 +5,7 @@ git ls cli helpers
 from wagon_common.helpers.subprocess import run_command
 
 
-def list_git_controlled_files(sources, verbose=False, include_deleted=False):
+def list_git_controlled_files(sources, verbose=False, include_deleted=False, path=None):
     """
     return a list of git controlled files matching path pattern
     """
@@ -22,7 +22,7 @@ def list_git_controlled_files(sources, verbose=False, include_deleted=False):
         "ls-files",
         ] + sources
 
-    _rc, output, _error = run_command(command, verbose=verbose)
+    _rc, output, _error = run_command(command, cwd=path, verbose=verbose)
 
     # decode output
     lines = output.decode("utf-8").strip().split("\n")
