@@ -32,7 +32,7 @@ def get_latest_commit(
 
     # decode output
     latest_commit_message = output.decode("utf-8").strip()
-
+    ### PAVEL: no check for errors
     return latest_commit_message
 
 
