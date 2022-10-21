@@ -28,3 +28,23 @@ def get_current_branch(path, verbose=False):
     branch = output.decode("utf-8").strip().strip("\n")
 
     return rc, output, error, branch
+
+
+def rename_branch(path, new_branch_name, verbose=False):
+    """
+    Rename the branch to 'new_branch_name'
+    """
+
+    command = [
+        "git",
+        "branch",
+        "-m",
+        new_branch_name,
+        ]
+
+    rc, output, error = run_command(
+        command,
+        cwd=path,
+        verbose=verbose)
+
+    return rc, output, error

@@ -1,3 +1,8 @@
+# 0.2.7 (2022-10-20)
+
+### Added
+
+- Adds `rename_branch` git helper
 
 # 0.2.6 (2022-04-17)
 
