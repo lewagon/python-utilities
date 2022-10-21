@@ -30,6 +30,7 @@ def gh_repo_create(path, fullname_or_url, verbose=False):
 
     return rc, output, error
 
+
 def gh_repo_list(org, max_count, json_fields, verbose=False):
     """
     list the repos of an organisation
