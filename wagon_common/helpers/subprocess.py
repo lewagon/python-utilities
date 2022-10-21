@@ -10,6 +10,8 @@ def run_command(command, cwd=None, input_bytes=None, verbose=False):
     command - a terminal command as a list, ex. ['cp', 'file', 'folder']
     cwd - current working directory to execute the command in
     input_bytes - any input params to communicate to the command
+
+    NOTE: commands run in 'bash' shell
     """
 
     if verbose:
