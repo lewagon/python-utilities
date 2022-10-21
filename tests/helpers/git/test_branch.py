@@ -13,6 +13,9 @@ class TestGitBranchHelper():
 
         # rename it to 'very-fancy-branch'
         rc, _output, _error = rename_branch(None, very_fancy_branch_name)
+
+        print(_output)
+        print(_error)
         assert rc == 0
 
         # get_branch_name to check it matches above
