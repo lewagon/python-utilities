@@ -44,7 +44,7 @@ def list_git_controlled_files(sources, verbose=False, include_deleted=False, pat
 
         # decode output
         deleted_lines = d_output.decode("utf-8").split("\n")
-        deleted_files = [f[3:] for f in deleted_lines if f[:1] == "D"]
+        deleted_files = [f[3:] for f in deleted_lines if f[:3] == " D "]
 
         # remove files that have been deleted but are still in the staging zone
         lines = sorted(set(lines) - set(deleted_files))
