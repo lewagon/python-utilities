@@ -4,6 +4,7 @@
 ### Added
 
 - Adds `manage_command` command subprocess helper
+- Adds output color helpers
 
 # 0.2.7 (2022-10-20)
 
