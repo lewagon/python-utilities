@@ -1,3 +1,10 @@
+
+# 0.2.8 (2022-10-31)
+
+### Added
+
+- Adds `manage_command` command subprocess helper
+
 # 0.2.7 (2022-10-20)
 
 ### Added
