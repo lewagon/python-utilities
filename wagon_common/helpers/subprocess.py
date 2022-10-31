@@ -1,7 +1,7 @@
 
-import subprocess
+from wagon_common.helpers.output import red, green, magenta
 
-from colorama import Fore, Style
+import subprocess
 
 
 def run_command(command, cwd=None, input_bytes=None, verbose=False):
@@ -15,12 +15,8 @@ def run_command(command, cwd=None, input_bytes=None, verbose=False):
     """
 
     if verbose:
-
-        print(Fore.MAGENTA
-              + "\nRunning `"
-              + "\"" + "\" \"".join(command) + "\""
-              + f"` in {cwd}"
-              + Style.RESET_ALL)
+        command_text = '"' + '" "'.join(command) + '"'
+        magenta(f"\nRunning `{command_text}` in {cwd}")
 
     p = subprocess.Popen(command,
                          cwd=cwd,                 # set current working directory
@@ -39,3 +35,25 @@ def run_command(command, cwd=None, input_bytes=None, verbose=False):
     rc = p.returncode
 
     return rc, output, error
+
+
+def manage_command(desc, command, cwd=None, verbose=False):
+    """
+    run command in subprocess and return output
+    """
+
+    green(desc)
+
+    rc, output, error = run_command(command, cwd=cwd, verbose=verbose)
+
+    if rc != 0:
+
+        red("\nError running command 🤕",
+            f"\n- command {command}"
+            + f"\n- rc {rc}"
+            + f"\n- output {output}"
+            + f"\n- error {error}")
+
+        raise ValueError("Error running command")
+
+    return output.decode("utf-8")
