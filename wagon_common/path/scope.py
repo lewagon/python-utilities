@@ -6,7 +6,6 @@ to a command ran in a git repository
 from wagon_common.git.git_repo import GitRepo
 
 from wagon_common.helpers.filter import (
-    list_files_matching_dirs,
     list_files_matching_pattern)
 from wagon_common.helpers.output import print_files
 
