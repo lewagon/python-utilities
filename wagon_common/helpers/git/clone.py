@@ -63,17 +63,17 @@ def fetch_repo(source, destination, verbose=False):
 
         if verbose:
 
-            blue("\nClone repo")
-            print(f"- source: {source}"
-                  + f"\n- destination: {destination}")
+            blue("\nClone repo",
+                 f"\n- source: {source}"
+                 + f"\n- destination: {destination}")
 
         # clone repo
         return clone_repo(source, destination, verbose=verbose)
 
     if verbose:
 
-        blue("\nFetch remote master")
-        print(f"- destination: {destination}")
+        blue("\nFetch remote master",
+             f"\n- destination: {destination}")
 
     # clone repo
     return pull_remote(destination, verbose=verbose)

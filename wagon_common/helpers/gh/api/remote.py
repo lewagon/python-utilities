@@ -35,8 +35,8 @@ def gh_get_params_from_remote(path, name, token):
 
     if response.status_code != 200:
 
-        red("\nUnable to retrieve repository params 🤕")
-        print(f"- response: {response.content}")
+        red("\nUnable to retrieve repository params 🤕",
+            f"\n- response: {response.content}")
 
     # retrieve repo data
     data = response.json()

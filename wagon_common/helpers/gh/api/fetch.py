@@ -9,8 +9,8 @@ def fetch_repos(org, token):
     fetch org repos
     """
 
-    green("\nFetch repos")
-    print(f"- org: {org}")
+    green("\nFetch repos",
+          f"\n- org: {org}")
 
     # build url
     url = f"https://api.github.com/orgs/{org}/repos"
@@ -41,8 +41,8 @@ def fetch_repos(org, token):
 
         if response.status_code != 200:
 
-            red("\nUnable to retrieve repositories 🤕")
-            print(f"- response: {response.content}")
+            red("\nUnable to retrieve repositories 🤕",
+                f"\n- response: {response.content}")
 
         # retrieve repos
         page_repos = response.json()

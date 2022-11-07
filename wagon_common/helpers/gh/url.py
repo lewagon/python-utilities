@@ -46,9 +46,9 @@ class GitHubRepo:
 
         if os.path.isdir(path):
 
-            red("\nDestination directory already exists 🤒")
-            print("Cannot clone the repo to existing location"
-                  + f"\n- path: {path}")
+            red("\nDestination directory already exists 🤒",
+                "\nCannot clone the repo to existing location"
+                + f"\n- path: {path}")
 
             raise FileExistsError(f"Repo directory already exists: {path}")
 
@@ -56,12 +56,12 @@ class GitHubRepo:
 
         if not cloned:
 
-            red("\nUnable to clone repo 🤒")
-            print("Cannot clone the repo to existing location"
-                  + f"\n- url: {self.url}"
-                  + f"\n- path: {path}"
-                  + f"\n- output: {output}"
-                  + f"\n- error: {error}")
+            red("\nUnable to clone repo 🤒",
+                "\nCannot clone the repo to existing location"
+                + f"\n- url: {self.url}"
+                + f"\n- path: {path}"
+                + f"\n- output: {output}"
+                + f"\n- error: {error}")
 
             raise Exception(f"Unable to clone repo: {self.url}, {path}")
 

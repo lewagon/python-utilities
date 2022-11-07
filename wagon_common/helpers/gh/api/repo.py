@@ -35,8 +35,8 @@ def gh_repo_list(fullname, token=None):
 
     if response.status_code != 200:
 
-        red("\nUnable to get repository 🤕")
-        print(f"- response: {response.content}")
+        red("\nUnable to get repository 🤕",
+            f"\n- response: {response.content}")
 
         return None
 
@@ -67,8 +67,8 @@ def gh_repo_rename(fullname, new_name, token):
 
     if response.status_code != 200:
 
-        red("\nUnable to update repository name 🤕")
-        print(f"- response: {response.content}")
+        red("\nUnable to update repository name 🤕",
+            f"\n- response: {response.content}")
 
 
 def gh_api_repo_create(org, name, token):
@@ -95,9 +95,9 @@ def gh_api_repo_create(org, name, token):
 
     if response.status_code != 201:
 
-        red("\nUnable to create repository 🤕")
-        print(f"- status code: {response.status_code}"
-              + f"\n- response: {response.content}")
+        red("\nUnable to create repository 🤕",
+            f"\n- status code: {response.status_code}"
+            + f"\n- response: {response.content}")
 
         return None
 
@@ -127,9 +127,9 @@ def gh_api_repo_update(org, name, token):
 
     if response.status_code != 200:
 
-        red("\nUnable to update repository 🤕")
-        print(f"- status code: {response.status_code}"
-              + f"\n- response: {response.content}")
+        red("\nUnable to update repository 🤕",
+            f"\n- status code: {response.status_code}"
+            + f"\n- response: {response.content}")
 
         return None
 

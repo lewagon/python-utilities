@@ -31,10 +31,10 @@ class TestBaseDirectoryEquality():
 
             if rc != 0:
 
-                red("\nDirectory content does not match 🤕")
-                print(f"- rc: {rc}"
-                      + f"\n- output: {output}"
-                      + f"\n- error: {error}")
+                red("\nDirectory content does not match 🤕",
+                    f"\n- rc: {rc}"
+                    + f"\n- output: {output}"
+                    + f"\n- error: {error}")
                 print(output.decode("utf-8"))
 
             assert rc == 0
@@ -43,10 +43,10 @@ class TestBaseDirectoryEquality():
 
             if rc == 0:
 
-                red("\nDirectory content matches 😬")
-                print(f"- rc: {rc}"
-                      + f"\n- output: {output}"
-                      + f"\n- error: {error}")
+                red("\nDirectory content matches 😬",
+                    f"\n- rc: {rc}"
+                    + f"\n- output: {output}"
+                    + f"\n- error: {error}")
                 print(output.decode("utf-8"))
 
             assert rc != 0

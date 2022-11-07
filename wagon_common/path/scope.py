@@ -42,8 +42,8 @@ class Scope:
 
         if not self.sources:
 
-            red("\nNo files controlled by git in the scope 😶‍🌫️")
-            print("Please make sure to `git add` any files that you want to use")
+            red("\nNo files controlled by git in the scope 😶‍🌫️",
+                "\nPlease make sure to `git add` any files that you want to use")
 
     def filter_ignored_patterns(self, patterns):
 

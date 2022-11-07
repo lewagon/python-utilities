@@ -23,16 +23,16 @@ class PublicationCommand:
             scope.repo.tld, target_tld))
 
         if verbose:
-            blue("\nResolved target tld:")
-            print(f"- source repo tld: {scope.repo.tld}"
-                  + f"\n- target tld: {target_tld}"
-                  + f"\n- resolved target tld: {abs_target_tld}")
+            blue("\nResolved target tld:",
+                 f"\n- source repo tld: {scope.repo.tld}"
+                 + f"\n- target tld: {target_tld}"
+                 + f"\n- resolved target tld: {abs_target_tld}")
 
         if verbose:
-            blue("\nProcess files:")
-            print(f"- from cwd: {scope.cwd}"
-                  + f"\n- command root: {command_root}"
-                  + f"\n- target root: {target_root}")
+            blue("\nProcess files:",
+                 f"\n- from cwd: {scope.cwd}"
+                 + f"\n- command root: {command_root}"
+                 + f"\n- target root: {target_root}")
 
         # iterate through scope files
         for source in scope:
@@ -85,9 +85,9 @@ class PublicationCommand:
 
             if processed_source[:2] == "..":
 
-                red("\nFile in scope outside of provided command root 🤕")
-                print(f"- source file: {processed_source}"
-                      + f"\n- command root: {command_root}")
+                red("\nFile in scope outside of provided command root 🤕",
+                    f"\n- source file: {processed_source}"
+                    + f"\n- command root: {command_root}")
 
                 raise Exception("File in scope outside of repo")
 
