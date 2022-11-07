@@ -8,7 +8,7 @@ from wagon_common.helpers.output import print_files
 import os
 import glob
 
-from colorama import Fore, Style
+from wagon_common.helpers.output import blue
 
 
 def resolve_scope(sources, patterns, verbose=False):
@@ -33,9 +33,7 @@ def resolve_scope(sources, patterns, verbose=False):
     for pattern in patterns:
 
         if verbose:
-            print(Fore.BLUE
-                  + f"\nResolving files matching the {pattern} pattern in the scope..."
-                  + Style.RESET_ALL)
+            blue(f"\nResolving files matching the {pattern} pattern in the scope...")
 
         # remove all sources that do not match the pattern
         filtered_sources = []
