@@ -2,9 +2,8 @@
 import re
 import os
 
-from colorama import Fore, Style
-
 from wagon_common.helpers.git.clone import clone_repo
+from wagon_common.helpers.output import red
 
 
 class GitHubRepo:
@@ -47,10 +46,8 @@ class GitHubRepo:
 
         if os.path.isdir(path):
 
-            print(Fore.RED
-                  + "\nDestination directory already exists 🤒"
-                  + Style.RESET_ALL
-                  + "\nCannot clone the repo to existing location"
+            red("\nDestination directory already exists 🤒")
+            print("Cannot clone the repo to existing location"
                   + f"\n- path: {path}")
 
             raise FileExistsError(f"Repo directory already exists: {path}")
@@ -59,10 +56,8 @@ class GitHubRepo:
 
         if not cloned:
 
-            print(Fore.RED
-                  + "\nUnable to clone repo 🤒"
-                  + Style.RESET_ALL
-                  + "\nCannot clone the repo to existing location"
+            red("\nUnable to clone repo 🤒")
+            print("Cannot clone the repo to existing location"
                   + f"\n- url: {self.url}"
                   + f"\n- path: {path}"
                   + f"\n- output: {output}"
