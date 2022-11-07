@@ -1,7 +1,7 @@
 
 from wagon_common.helpers.directories import are_directories_identical
 
-from colorama import Fore, Style
+from wagon_common.helpers.output import red
 
 import os
 import shutil
@@ -31,10 +31,8 @@ class TestBaseDirectoryEquality():
 
             if rc != 0:
 
-                print(Fore.RED
-                      + "\nDirectory content does not match 🤕"
-                      + Style.RESET_ALL
-                      + f"\n- rc: {rc}"
+                red("\nDirectory content does not match 🤕")
+                print(f"- rc: {rc}"
                       + f"\n- output: {output}"
                       + f"\n- error: {error}")
                 print(output.decode("utf-8"))
@@ -45,10 +43,8 @@ class TestBaseDirectoryEquality():
 
             if rc == 0:
 
-                print(Fore.RED
-                      + "\nDirectory content matches 😬"
-                      + Style.RESET_ALL
-                      + f"\n- rc: {rc}"
+                red("\nDirectory content matches 😬")
+                print(f"- rc: {rc}"
                       + f"\n- output: {output}"
                       + f"\n- error: {error}")
                 print(output.decode("utf-8"))
