@@ -1,10 +1,14 @@
 
-# 0.2.8 (2022-10-31)
+# 0.2.8 (2022-11-07)
 
 ### Added
 
-- Adds `manage_command` command subprocess helper
-- Adds output color helpers
+- Adds `manage_command` command subprocess helper handling output for `run_command`
+- Adds `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan` and `white` helpers for print with `colorama`
+
+### Updated
+
+- Update `run_command` to print command output progressively (used in order to display remote command output when calling `gcloud compute ssh ...`)
 
 # 0.2.7 (2022-10-20)
 
