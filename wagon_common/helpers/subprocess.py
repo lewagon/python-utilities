@@ -10,6 +10,7 @@ def run_command(command, cwd=None, input_bytes=None, show_progress=False, verbos
     command - a terminal command as a list, ex. ['cp', 'file', 'folder']
     cwd - current working directory to execute the command in
     input_bytes - any input params to communicate to the command
+    show_progress - print command output as it occurs (for `gcloud compute ssh ...` commands)
 
     NOTE: commands run in 'bash' shell
     """
