@@ -40,6 +40,7 @@ def resolve_scope(sources, patterns, verbose=False):
         # remove all sources that do not match the pattern
         filtered_sources = []
         ignored_files = []
+        deleted_files = []
 
         for source in sources:
 
@@ -67,11 +68,19 @@ def resolve_scope(sources, patterns, verbose=False):
                     # source is ignored
                     ignored_files.append(source)
 
+            else:
+
+                # the source is likely a deleted file
+                deleted_files.append(source)
+
         if verbose:
             print_files("red", f"Files ignored for {pattern}", ignored_files)
 
         if verbose:
             print_files("blue", f"Files and directory patterns matching {pattern}", filtered_sources)
+
+        if verbose:
+            print_files("red", "Files and directories considered deleted", deleted_files)
 
         if len(filtered_sources) > 0:
 
@@ -89,7 +98,7 @@ def resolve_scope(sources, patterns, verbose=False):
         # append sorted unique results
         results.append(sorted(set(res)))
 
-    return results
+    return sum(results, []), deleted_files
 
 
 if __name__ == '__main__':
