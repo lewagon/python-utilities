@@ -7,6 +7,7 @@ from functools import cached_property
 
 class GitRepo:
     """
+    helper class for git cli commands
     provides a mapping to the git cli commands
     does no try to control the state of the targeted git repo
     """

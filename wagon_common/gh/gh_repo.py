@@ -6,7 +6,7 @@ from wagon_common.helpers.output import red
 
 class GhRepo:
     """
-    helper class for gh api commands
+    helper class for gh api calls
     """
 
     def __init__(self, name, token=None, is_org=True, verbose=False):
