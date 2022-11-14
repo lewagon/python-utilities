@@ -42,7 +42,7 @@ class TestGhRepo():
 
         # Cleanup
 
-    def test_gh_repo_delete_prod(self, pat):
+    def test_gh_repo_delete_prod(self, token):
         """
         verify that a production repo cannot be deleted
         """
@@ -50,14 +50,14 @@ class TestGhRepo():
         exception_catched = False
 
         try:
-            GhRepo("lewagon/data-solutions", token=pat).delete()
+            GhRepo("lewagon/data-solutions", token=token).delete()
         except NameError as e:
             exception_catched = True
             assert str(e) == "cannot delete repo in production organisation"
 
         assert exception_catched
 
-    def test_gh_repo_delete_test(self, pat):
+    def test_gh_repo_delete_test(self, token):
         """
         verify that a test or QA repo can be deleted
         """
@@ -66,7 +66,7 @@ class TestGhRepo():
         exception_catched = False
 
         try:
-            GhRepo("lewagon-test/data-solutions", token=pat).delete()
+            GhRepo("lewagon-test/data-solutions", token=token).delete()
         except NameError:
             exception_catched = True
 
@@ -76,13 +76,13 @@ class TestGhRepo():
         exception_catched = False
 
         try:
-            GhRepo("Le-Wagon-QA/data-solutions", token=pat).delete()
+            GhRepo("Le-Wagon-QA/data-solutions", token=token).delete()
         except NameError:
             exception_catched = True
 
         assert not exception_catched
 
-    def test_gh_repo_crud(self, pat):
+    def test_gh_repo_crud(self, token):
         """
         verifies repo crud
         """
@@ -90,7 +90,7 @@ class TestGhRepo():
         # Arrange
 
         # Act
-        repo = GhRepo("Le-Wagon-QA/automated-test", token=pat)
+        repo = GhRepo("Le-Wagon-QA/automated-test", token=token)
         create_response = repo.create()
         get_response = repo.get()
         update_response = repo.update(dict(description="automated update test"))
