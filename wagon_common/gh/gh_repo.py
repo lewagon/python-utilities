@@ -65,6 +65,8 @@ class GhRepo:
 
             red("\nGH api error 🤕",
                 f"\n- context {context}"
+                + f"\n- path: {path}"
+                + f"\n- verb: {verb}"
                 + f"\n- params: {params}"
                 + f"\n- expected status code: {status_code}"
                 + f"\n- status code: {response.status_code}"
