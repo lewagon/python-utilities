@@ -36,7 +36,7 @@ class GhRepo:
 
         return name, owner, repository
 
-    def __call(self, path=None, verb="get", headers={}, params={}, context="", status_code=200):
+    def __call(self, path=None, verb="get", headers={}, params={}, context="", status_code=200, decode_response=True):
         """
         resolve api call
         """
@@ -56,11 +56,6 @@ class GhRepo:
         # add auth
         headers["Authorization"] = f"token {self.token}"
 
-        # add owner and repo
-        params = dict(
-            owner=self.owner,
-            repo=self.repository)
-
         # list repo params
         response = call_method(self.base_url + path,
                                headers=headers,
@@ -70,13 +65,15 @@ class GhRepo:
 
             red("\nGH api error 🤕",
                 f"\n- context {context}"
+                + f"\n- params: {params}"
                 + f"\n- expected status code: {status_code}"
                 + f"\n- status code: {response.status_code}"
                 + f"\n- response: {response.content}")
 
             raise ValueError("GH api error")
 
-        return response.json()
+        if decode_response:
+            return response.json()
 
     def create(self, params={}):
         """
@@ -124,4 +121,4 @@ class GhRepo:
             return {}
 
         # delete repo
-        return self.__call(verb="delete", status_code=204)
+        return self.__call(verb="delete", status_code=204, decode_response=False)

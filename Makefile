@@ -5,3 +5,6 @@ pylint:
 
 pytest:
 	PYTHONDONTWRITEBYTECODE=1 pytest -v --color=yes
+
+pytest_output:
+	PYTHONDONTWRITEBYTECODE=1 pytest -v --color=yes -s
