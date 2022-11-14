@@ -78,13 +78,23 @@ class GhRepo:
 
         return response.json()
 
-    def create(self):
+    def create(self, params={}):
         """
         create repository
         """
 
+        params["org"] = self.owner
+        params["name"] = self.repository
+        # description
+        # homepage
+        # private
+        # has_issues
+        # has_projects
+        # has_wiki
+
         return self.__call(path=f"/orgs/{self.owner}/repos",
                            verb="post",
+                           params=params,
                            status_code=201)
 
     def get(self):
