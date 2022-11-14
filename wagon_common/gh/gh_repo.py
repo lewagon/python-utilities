@@ -84,12 +84,6 @@ class GhRepo:
 
         params["org"] = self.owner
         params["name"] = self.repository
-        # description
-        # homepage
-        # private
-        # has_issues
-        # has_projects
-        # has_wiki
 
         return self.__call(path=f"/orgs/{self.owner}/repos",
                            verb="post",
