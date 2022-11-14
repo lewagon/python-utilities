@@ -23,3 +23,26 @@ class TestGhRepo():
         assert lw_repo.name == "lewagon/myriad"
 
         # Cleanup
+
+    def test_gh_repo_delete_prod(self):
+
+        exception_catched = False
+
+        try:
+            GhRepo("lewagon/data-solutions").delete()
+        except NameError as e:
+            exception_catched = True
+            assert str(e) == "cannot delete repo in production organisation"
+
+        assert exception_catched
+
+    def test_gh_repo_delete_test(self):
+
+        exception_catched = False
+
+        try:
+            GhRepo("lewagon-test/data-solutions").delete()
+        except NameError:
+            exception_catched = True
+
+        assert not exception_catched

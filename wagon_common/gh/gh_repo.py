@@ -27,3 +27,12 @@ class GhRepo:
             name = f"{owner}/{repository}"
 
         return name, owner, repository
+
+    def delete(self):
+        """
+        delete repository
+        """
+
+        # protect production repositories
+        if self.owner not in ["lewagon-test", "Le-Wagon-QA"]:
+            raise NameError("cannot delete repo in production organisation")
