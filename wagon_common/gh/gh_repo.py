@@ -100,7 +100,7 @@ class GhRepo:
 
         return self.__call(verb="patch", params=params)
 
-    def delete(self):
+    def delete(self, dry_run=True):
         """
         delete repository
         """
@@ -108,6 +108,9 @@ class GhRepo:
         # protect production repositories
         if self.owner not in ["lewagon-test", "Le-Wagon-QA"]:
             raise NameError("cannot delete repo in production organisation")
+
+        if dry_run:
+            return {}
 
         # delete repo
         return self.__call(verb="delete", status_code=204)

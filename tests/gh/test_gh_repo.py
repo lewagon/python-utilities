@@ -1,8 +1,26 @@
 
 from wagon_common.gh.gh_repo import GhRepo
 
+import os
+
+import pytest
+
+from dotenv import load_dotenv, find_dotenv
+
 
 class TestGhRepo():
+
+    @pytest.fixture
+    def token(self):
+
+        # Arrange
+        load_dotenv(find_dotenv())
+        pat = os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN")
+
+        # Act & Assert
+        yield pat
+
+        # Cleanup
 
     def test_gh_repo_creation(self):
 
@@ -24,7 +42,7 @@ class TestGhRepo():
 
         # Cleanup
 
-    def test_gh_repo_delete_prod(self):
+    def test_gh_repo_delete_prod(self, pat):
         """
         verify that a production repo cannot be deleted
         """
@@ -32,14 +50,14 @@ class TestGhRepo():
         exception_catched = False
 
         try:
-            GhRepo("lewagon/data-solutions").delete()
+            GhRepo("lewagon/data-solutions", token=pat).delete()
         except NameError as e:
             exception_catched = True
             assert str(e) == "cannot delete repo in production organisation"
 
         assert exception_catched
 
-    def test_gh_repo_delete_test(self):
+    def test_gh_repo_delete_test(self, pat):
         """
         verify that a test or QA repo can be deleted
         """
@@ -48,7 +66,7 @@ class TestGhRepo():
         exception_catched = False
 
         try:
-            GhRepo("lewagon-test/data-solutions").delete()
+            GhRepo("lewagon-test/data-solutions", token=pat).delete()
         except NameError:
             exception_catched = True
 
@@ -58,13 +76,13 @@ class TestGhRepo():
         exception_catched = False
 
         try:
-            GhRepo("Le-Wagon-QA/data-solutions").delete()
+            GhRepo("Le-Wagon-QA/data-solutions", token=pat).delete()
         except NameError:
             exception_catched = True
 
         assert not exception_catched
 
-    def test_gh_repo_crud(self):
+    def test_gh_repo_crud(self, pat):
         """
         verifies repo crud
         """
@@ -72,11 +90,11 @@ class TestGhRepo():
         # Arrange
 
         # Act
-        repo = GhRepo("Le-Wagon-QA/automated-test")
+        repo = GhRepo("Le-Wagon-QA/automated-test", token=pat)
         create_response = repo.create()
         get_response = repo.get()
         update_response = repo.update(dict(description="automated update test"))
-        repo.delete()
+        repo.delete(dry_run=False)
 
         # Assert
         assert "node_id" in create_response
