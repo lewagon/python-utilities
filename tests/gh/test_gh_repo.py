@@ -44,6 +44,7 @@ class TestGhRepo():
         verify that a test or QA repo can be deleted
         """
 
+        # test gh repo can be deleted
         exception_catched = False
 
         try:
@@ -53,6 +54,7 @@ class TestGhRepo():
 
         assert not exception_catched
 
+        # QA gh repo can be deleted
         exception_catched = False
 
         try:
