@@ -10,12 +10,16 @@ class TestGhRepo():
 
         # Act
         repo = GhRepo("lewagon-test/data-solutions")
+
         lw_repo = GhRepo("myriad")
 
         # Assert
         assert repo.owner == "lewagon-test"
         assert repo.repository == "data-solutions"
+        assert repo.name == "lewagon-test/data-solutions"
+
         assert lw_repo.owner == "lewagon"
         assert lw_repo.repository == "myriad"
+        assert lw_repo.name == "lewagon/myriad"
 
         # Cleanup

@@ -7,10 +7,8 @@ class GhRepo:
     def __init__(self, name, is_org=True, verbose=False):
 
         self.is_org = is_org
-        self.name = name
+        self.name, self.owner, self.repository = self.__identify(name)
         self.verbose = verbose
-
-        self.owner, self.repository = self.__identify(name)
 
     def __identify(self, name):
         """
@@ -25,6 +23,7 @@ class GhRepo:
             repository = parts[1]
         else:
             owner = "lewagon"
-            repository = parts[0]
+            repository = name
+            name = f"{owner}/{repository}"
 
-        return owner, repository
+        return name, owner, repository
