@@ -22,7 +22,7 @@ class TestGhRepo():
 
         # Cleanup
 
-    def test_gh_repo_creation(self):
+    def test_gh_repo_naming(self):
 
         # Arrange
 
@@ -57,7 +57,7 @@ class TestGhRepo():
 
         assert exception_catched
 
-    def test_gh_repo_delete_test(self, token):
+    def test_gh_repo_delete_test_qa(self, token):
         """
         verify that a test or QA repo can be deleted
         """
