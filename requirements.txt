@@ -1,3 +1,4 @@
 colorama
 pylint
 pytest
+dotenv
