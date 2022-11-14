@@ -63,3 +63,31 @@ class TestGhRepo():
             exception_catched = True
 
         assert not exception_catched
+
+    def test_gh_repo_crud(self):
+        """
+        verifies repo crud
+        """
+
+        # Arrange
+
+        # Act
+        repo = GhRepo("Le-Wagon-QA/automated-test")
+        create_response = repo.create()
+        get_response = repo.get()
+        update_response = repo.update(dict(description="automated update test"))
+        repo.delete()
+
+        # Assert
+        assert "node_id" in create_response
+        assert "node_id" in get_response
+        assert "node_id" in update_response
+
+        create_node_id = create_response["node_id"]
+        get_node_id = get_response["node_id"]
+        update_node_id = update_response["node_id"]
+
+        assert create_node_id == get_node_id
+        assert create_node_id == update_node_id
+
+        # Cleanup

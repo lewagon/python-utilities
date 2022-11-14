@@ -35,10 +35,14 @@ class GhRepo:
 
         return name, owner, repository
 
-    def __call(self, path="", verb="get", headers={}, params={}, context=""):
+    def __call(self, path=None, verb="get", headers={}, params={}, context="", status_code=200):
         """
         resolve api call
         """
+
+        # set path
+        if path is None:
+            path = self.base_url
 
         # resolve http verb call method
         call_method = dict(
@@ -51,21 +55,50 @@ class GhRepo:
         # add auth
         headers["Authorization"] = f"token {self.token}"
 
+        # add owner and repo
+        params = dict(
+            owner=self.owner,
+            repo=self.repository)
+
         # list repo params
-        response = call_method(self.base_url + path,
+        response = call_method(path,
                                headers=headers,
                                json=params)
 
-        if response.status_code != 200:
+        if response.status_code != status_code:
 
             red("\nGH api error 🤕",
                 f"\n- context {context}"
+                + f"\n- expected status code: {status_code}"
                 + f"\n- status code: {response.status_code}"
                 + f"\n- response: {response.content}")
 
             raise ValueError("GH api error")
 
         return response.json()
+
+    def create(self):
+        """
+        create repository
+        """
+
+        return self.__call(path=f"/orgs/{self.owner}/repos",
+                           verb="post",
+                           status_code=201)
+
+    def get(self):
+        """
+        get repository
+        """
+
+        return self.__call()
+
+    def update(self, params):
+        """
+        update repository
+        """
+
+        return self.__call(verb="patch", params=params)
 
     def delete(self):
         """
@@ -77,8 +110,4 @@ class GhRepo:
             raise NameError("cannot delete repo in production organisation")
 
         # delete repo
-        params = dict(
-            owner=self.owner,
-            repo=self.repository)
-
-        self.__call(verb="delete", params=params)
+        return self.__call(verb="delete", status_code=204)
