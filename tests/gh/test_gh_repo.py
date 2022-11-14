@@ -25,6 +25,9 @@ class TestGhRepo():
         # Cleanup
 
     def test_gh_repo_delete_prod(self):
+        """
+        verify that a production repo cannot be deleted
+        """
 
         exception_catched = False
 
@@ -37,11 +40,23 @@ class TestGhRepo():
         assert exception_catched
 
     def test_gh_repo_delete_test(self):
+        """
+        verify that a test or QA repo can be deleted
+        """
 
         exception_catched = False
 
         try:
             GhRepo("lewagon-test/data-solutions").delete()
+        except NameError:
+            exception_catched = True
+
+        assert not exception_catched
+
+        exception_catched = False
+
+        try:
+            GhRepo("Le-Wagon-QA/data-solutions").delete()
         except NameError:
             exception_catched = True
 
