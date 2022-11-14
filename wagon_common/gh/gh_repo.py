@@ -13,7 +13,8 @@ class GhRepo:
 
         self.is_org = is_org
         self.name, self.owner, self.repository = self.__identify(name)
-        self.base_url = f"https://api.github.com/repos/{self.owner}/{self.repository}"
+        self.base_url = "https://api.github.com"
+        self.default_path = f"/repos/{self.owner}/{self.repository}"
         self.token = token
         self.verbose = verbose
 
@@ -42,7 +43,7 @@ class GhRepo:
 
         # set path
         if path is None:
-            path = self.base_url
+            path = self.default_path
 
         # resolve http verb call method
         call_method = dict(
@@ -61,7 +62,7 @@ class GhRepo:
             repo=self.repository)
 
         # list repo params
-        response = call_method(path,
+        response = call_method(self.base_url + path,
                                headers=headers,
                                json=params)
 
