@@ -6,6 +6,10 @@ from functools import cached_property
 
 
 class GitRepo:
+    """
+    provides a mapping to the git cli commands
+    does no try to control the state of the targeted git repo
+    """
 
     def __init__(self, path, verbose=False):
 
