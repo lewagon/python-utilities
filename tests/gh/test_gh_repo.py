@@ -13,7 +13,7 @@ class TestGhRepo():
     @pytest.fixture
     def token(self):
         """
-        fetch gh api token to perform the tests
+        fetch gh token to perform the tests
         """
 
         # Arrange

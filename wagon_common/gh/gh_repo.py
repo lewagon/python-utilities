@@ -11,7 +11,7 @@ class GhRepo:
 
     def __init__(self, name, token=None, is_org=True, verbose=False):
         """
-        required token scopes:
+        required gh token scopes:
         - repo: push commits TBC
         - admin:org: create repos TBC
         - workflow: push commits containing `.github/workflows/*.yml` files
