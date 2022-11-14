@@ -12,6 +12,9 @@ class TestGhRepo():
 
     @pytest.fixture
     def token(self):
+        """
+        fetch gh api token to perform the tests
+        """
 
         # Arrange
         load_dotenv(find_dotenv())

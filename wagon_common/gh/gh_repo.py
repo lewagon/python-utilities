@@ -10,6 +10,13 @@ class GhRepo:
     """
 
     def __init__(self, name, token=None, is_org=True, verbose=False):
+        """
+        required token scopes:
+        - repo: push commits TBC
+        - admin:org: create repos TBC
+        - workflow: push commits containing `.github/workflows/*.yml` files
+        - delete_repo: delete `lewagon-test` and `Le-Wagon-QA` repositories
+        """
 
         self.is_org = is_org
         self.name, self.owner, self.repository = self.__identify(name)
