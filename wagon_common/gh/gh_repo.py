@@ -65,7 +65,7 @@ class GhRepo:
         params["name"] = self.repo
 
         request = dict(
-            url=self.base_url + f"/orgs/{self.owner}/repos",
+            url=f"{self.base_url}/orgs/{self.owner}/repos",
             headers=self.headers,
             json=params)
 
@@ -82,14 +82,14 @@ class GhRepo:
         """
 
         request = dict(
-            url=self.base_url + f"/repos/{self.owner}/{self.repo}",
+            url=f"{self.base_url}/repos/{self.owner}/{self.repo}",
             headers=self.headers,
             json={})
 
         response = requests.get(**request)
 
         if response.status_code != 200:
-            self.__error(request, response, "repo create")
+            self.__error(request, response, "repo get")
 
         return response.json()
 
@@ -99,14 +99,14 @@ class GhRepo:
         """
 
         request = dict(
-            url=self.base_url + f"/repos/{self.owner}/{self.repo}",
+            url=f"{self.base_url}/repos/{self.owner}/{self.repo}",
             headers=self.headers,
             json=params)
 
         response = requests.patch(**request)
 
         if response.status_code != 200:
-            self.__error(request, response, "repo create")
+            self.__error(request, response, "repo update")
 
         return response.json()
 
@@ -124,11 +124,11 @@ class GhRepo:
 
         # delete repo
         request = dict(
-            url=self.base_url + f"/repos/{self.owner}/{self.repo}",
+            url=f"{self.base_url}/repos/{self.owner}/{self.repo}",
             headers=self.headers,
             json=params)
 
         response = requests.delete(**request)
 
         if response.status_code != 204:
-            self.__error(request, response, "repo create")
+            self.__error(request, response, "repo delete")
