@@ -18,10 +18,10 @@ class TestGhRepo():
 
         # Arrange
         load_dotenv(find_dotenv())
-        pat = os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN")
+        token = os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN")
 
         # Act & Assert
-        yield pat
+        yield token
 
         # Cleanup
 
