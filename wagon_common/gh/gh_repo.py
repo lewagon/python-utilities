@@ -20,15 +20,14 @@ class GhRepo:
         - delete_repo: delete `lewagon-test` and `Le-Wagon-QA` repositories
         """
 
+        self.name, self.owner, self.repo = self.__identify(name)
+        self.headers = dict(Authorization=f"token {token}")
         self.is_org = is_org
-        self.name, self.owner, self.repository = self.__identify(name)
-        self.default_path = f"/repos/{self.owner}/{self.repository}"
-        self.token = token
         self.verbose = verbose
 
     def __identify(self, name):
         """
-        identify owner and repository from provided name
+        identify owner and repo from provided name
         (gh cli nomenclatura)
         """
 
@@ -36,93 +35,100 @@ class GhRepo:
 
         if len(parts) == 2:
             owner = parts[0]
-            repository = parts[1]
+            repo = parts[1]
         else:
             owner = "lewagon"
-            repository = name
-            name = f"{owner}/{repository}"
+            repo = name
+            name = f"{owner}/{repo}"
 
-        return name, owner, repository
+        return name, owner, repo
 
-    def __call(self, path=None, verb="get", headers={}, params={}, context="", status_code=200, decode_response=True):
+    def __error(self, request, response, context):
         """
-        resolve api call
+        log api call and raise error
         """
 
-        # set path
-        if path is None:
-            path = self.default_path
+        red(f"\nGH api error in {context} 🤕",
+            f"\n- url: {request.url}"
+            + f"\n- params: {request.json}"
+            + f"\n- status code: {response.status_code}"
+            + f"\n- response: {response.content}")
 
-        # resolve http verb call method
-        call_method = dict(
-            get=requests.get,
-            put=requests.put,
-            patch=requests.patch,
-            post=requests.post,
-            delete=requests.delete)[verb]
-
-        # add auth
-        headers["Authorization"] = f"token {self.token}"
-
-        # list repo params
-        response = call_method(self.base_url + path,
-                               headers=headers,
-                               json=params)
-
-        if response.status_code != status_code:
-
-            red("\nGH api error 🤕",
-                f"\n- context {context}"
-                + f"\n- path: {path}"
-                + f"\n- verb: {verb}"
-                + f"\n- params: {params}"
-                + f"\n- expected status code: {status_code}"
-                + f"\n- status code: {response.status_code}"
-                + f"\n- response: {response.content}")
-
-            raise ValueError("GH api error")
-
-        if decode_response:
-            return response.json()
+        raise ValueError("GH api error")
 
     def create(self, params={}):
         """
-        create repository
+        create repo
         """
 
         params["org"] = self.owner
-        params["name"] = self.repository
+        params["name"] = self.repo
 
-        return self.__call(path=f"/orgs/{self.owner}/repos",
-                           verb="post",
-                           params=params,
-                           status_code=201)
+        request = dict(
+            url=self.base_url + f"/orgs/{self.owner}/repos",
+            headers=self.headers,
+            json=params)
+
+        response = requests.post(**request)
+
+        if response.status_code != 201:
+            self.__error(request, response, "repo create")
+
+        return response.json()
 
     def get(self):
         """
-        get repository
+        get repo
         """
 
-        return self.__call()
+        request = dict(
+            url=self.base_url + f"/repos/{self.owner}/{self.repo}",
+            headers=self.headers,
+            json={})
 
-    def update(self, params):
+        response = requests.get(**request)
+
+        if response.status_code != 200:
+            self.__error(request, response, "repo create")
+
+        return response.json()
+
+    def update(self, params={}):
         """
-        update repository
+        update repo
         """
 
-        return self.__call(verb="patch", params=params)
+        request = dict(
+            url=self.base_url + f"/repos/{self.owner}/{self.repo}",
+            headers=self.headers,
+            json=params)
 
-    def delete(self, dry_run=True):
+        response = requests.patch(**request)
+
+        if response.status_code != 200:
+            self.__error(request, response, "repo create")
+
+        return response.json()
+
+    def delete(self, params={}, dry_run=True):
         """
-        delete repository
+        delete repo
         """
 
         # protect production repositories
         if self.owner not in ["lewagon-test", "Le-Wagon-QA"]:
-            raise NameError("cannot delete repo in production organisation")
+            raise NameError(f"cannot delete repo in {self.owner} production organisation")
 
         if dry_run:
             return {}
 
         # delete repo
-        return self.__call(verb="delete", status_code=204, decode_response=False)
+        request = dict(
+            url=self.base_url + f"/repos/{self.owner}/{self.repo}",
+            headers=self.headers,
+            json=params)
+
+        response = requests.delete(**request)
+
+        if response.status_code != 204:
+            self.__error(request, response, "repo create")

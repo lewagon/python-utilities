@@ -36,11 +36,11 @@ class TestGhRepo():
 
         # Assert
         assert repo.owner == "lewagon-test"
-        assert repo.repository == "data-solutions"
+        assert repo.repo == "data-solutions"
         assert repo.name == "lewagon-test/data-solutions"
 
         assert lw_repo.owner == "lewagon"
-        assert lw_repo.repository == "myriad"
+        assert lw_repo.repo == "myriad"
         assert lw_repo.name == "lewagon/myriad"
 
         # Cleanup
@@ -56,7 +56,7 @@ class TestGhRepo():
             GhRepo("lewagon/data-solutions", token=token).delete()
         except NameError as e:
             exception_catched = True
-            assert str(e) == "cannot delete repo in production organisation"
+            assert "cannot delete repo in" in str(e)
 
         assert exception_catched
 
