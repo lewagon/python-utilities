@@ -9,6 +9,8 @@ class GhRepo:
     helper class for gh api calls
     """
 
+    base_url = "https://api.github.com"
+
     def __init__(self, name, token=None, is_org=True, verbose=False):
         """
         required gh token scopes:
@@ -20,7 +22,6 @@ class GhRepo:
 
         self.is_org = is_org
         self.name, self.owner, self.repository = self.__identify(name)
-        self.base_url = "https://api.github.com"
         self.default_path = f"/repos/{self.owner}/{self.repository}"
         self.token = token
         self.verbose = verbose
