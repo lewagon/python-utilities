@@ -62,7 +62,7 @@ def manage_command(desc, command, valid_errors=[], cwd=None, show_progress=False
         # check if output contains a valid error (ie `rc != 0` is not an issue)
         valid_error = False
         for valid_error in valid_errors:
-            if valid_error in raw_output:
+            if valid_error in output:
                 valid_error = True
                 break
 
