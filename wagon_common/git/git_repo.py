@@ -5,6 +5,7 @@ from wagon_common.helpers.git.repo import get_git_top_level_directory
 from wagon_common.helpers.git.clone import clone_repo
 from wagon_common.helpers.git.create import git_init, git_add, git_commit
 from wagon_common.helpers.git.remote import git_remote_add, git_remote_show_head_branch
+from wagon_common.helpers.git.branch import get_current_branch
 from wagon_common.helpers.git.push import git_push
 from wagon_common.helpers.git.ls import list_git_controlled_files
 
@@ -59,9 +60,13 @@ class GitRepo:
             remote=remote,
             verbose=self.verbose)
 
+    def current_branch(self):
+        rc, output, error, branch = get_current_branch(self.path, verbose=self.verbose)
+        return branch
+
     def push(self, remote: str = "origin", branch=None):
         if branch is None:
-            branch = self.remote_head_branch(remote)
+            branch = self.current_branch()
         git_push(self.path, branch, remote, verbose=self.verbose)
 
     def ls_files(self, sources, include_deleted=False, path=None):
