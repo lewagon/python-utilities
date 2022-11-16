@@ -13,7 +13,7 @@ class GhRepo:
 
     base_url = "https://api.github.com"
 
-    def __init__(self, name, token=None, is_org=True, verbose=False):
+    def __init__(self, name, token, is_org=True, verbose=False):
         """
         required gh token scopes:
         - repo: push commits TBC

@@ -30,9 +30,9 @@ class TestGhRepo():
         # Arrange
 
         # Act
-        repo = GhRepo("lewagon-test/data-solutions")
+        repo = GhRepo("lewagon-test/data-solutions", token=None)
 
-        lw_repo = GhRepo("myriad")
+        lw_repo = GhRepo("myriad", token=None)
 
         # Assert
         assert repo.owner == "lewagon-test"
