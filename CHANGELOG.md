@@ -1,4 +1,11 @@
 
+# 0.2.9 (2022-11-16)
+
+### Added
+
+- Adds `GitRepo` and `GhRepo` helper classes
+- Adds tests for the `GhRepo` class
+
 # 0.2.8 (2022-11-07)
 
 ### Added
