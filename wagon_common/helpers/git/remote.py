@@ -4,7 +4,7 @@ git remote cli helpers
 
 from wagon_common.helpers.gh.url import GitHubRepo
 
-from wagon_common.helpers.subprocess import run_command
+from wagon_common.helpers.subprocess import run_command, manage_command
 
 
 def git_remote_list(path, verbose=False):
@@ -115,6 +115,22 @@ def git_remote_add(path, name, url, verbose=False):
         print(output.decode("utf-8"))
 
     return rc, output, error
+
+
+def git_remote_show_head_branch(path, remote="origin", verbose=False):
+    """ get remote default branch: master vs main """
+
+    # show remote
+    command = f"git remote show {remote}".split()
+
+    output = manage_command("Show git remote", command, verbose=verbose)
+
+    # filter output
+    head_branch = [line for line in output if "HEAD branch:" in line][0]
+
+    default_branch = head_branch.strip("HEAD branch:").strip()
+
+    return default_branch
 
 
 if __name__ == '__main__':
