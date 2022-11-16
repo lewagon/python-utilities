@@ -157,7 +157,7 @@ class GitRepo:
                 "push",
                 remote,
             ] + ([branch] if branch is not None else [])
-            + (["--set-upstream"] if set_upstream is not None else [])
+            + (["--set-upstream"] if set_upstream [])
             + (["--force"] if force else []))
 
     def ls_files(self, sources, include_deleted=False, path=None):
