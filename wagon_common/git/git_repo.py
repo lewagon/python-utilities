@@ -1,12 +1,9 @@
 
 from wagon_common.gh.gh_repo import GhRepo
 
+from wagon_common.helpers.subprocess import manage_command
+
 from wagon_common.helpers.git.repo import get_git_top_level_directory
-from wagon_common.helpers.git.clone import clone_repo
-from wagon_common.helpers.git.create import git_init, git_add, git_commit
-from wagon_common.helpers.git.remote import git_remote_add, git_remote_show_head_branch
-from wagon_common.helpers.git.branch import get_current_branch
-from wagon_common.helpers.git.push import git_push
 from wagon_common.helpers.git.ls import list_git_controlled_files
 
 from typing import Union
@@ -23,8 +20,17 @@ class GitRepo:
 
     def __init__(self, path, verbose=False):
 
-        self.path = path
+        self.path = path                # repo tld
         self.verbose = verbose
+
+    def __command(self, desc, command):
+
+        return manage_command(
+            desc,
+            command,
+            cwd=self.path,              # run commands at the repo tld
+            show_progress=True,         # show commands output as it occurs
+            verbose=self.verbose)       # show commands being ran
 
     @cached_property
     def tld(self):
@@ -35,39 +41,93 @@ class GitRepo:
 
         return tld
 
-    def clone(self, url: Union[str, GhRepo]):
+    def clone(self, url: Union[str, GhRepo], quiet=False):
+
         if isinstance(url, GhRepo):
             url = url.ssh_url
-        clone_repo(url, self.path, verbose=self.verbose)
+
+        return self.__command(
+            "Initialize git repo",
+            [
+                "git",
+                "clone",
+                url,
+                ".",
+            ] + (["--quiet"] if quiet else []))
 
     def init(self):
-        git_init(self.path, verbose=self.verbose)
+
+        return self.__command(
+            "Initialize git repo",
+            [
+                "git",
+                "init"
+            ])
 
     def add(self):
-        git_add(self.path, verbose=self.verbose)
+
+        return self.__command(
+            "Add repo content to the staging zone",
+            [
+                "git",
+                "add",
+                "--all"
+            ])
 
     def commit(self, message: str):
-        git_commit(self.path, message, verbose=self.verbose)
+
+        return self.__command(
+            "Commit content in the staging zone",
+            [
+                "git",
+                "commit",
+                "-m",
+                message
+            ])
 
     def remote_add(self, url: Union[str, GhRepo], remote: str = "origin"):
+
         if isinstance(url, GhRepo):
             url = url.ssh_url
-        git_remote_add(self.path, remote, url, verbose=self.verbose)
 
-    def remote_head_branch(self, remote: str = "origin"):
-        return git_remote_show_head_branch(
-            path=self.path,
-            remote=remote,
-            verbose=self.verbose)
+        return self.__command(
+            "Add remote",
+            [
+                "git",
+                "remote",
+                "add",
+                remote,
+                url
+            ])
 
     def current_branch(self):
-        rc, output, error, branch = get_current_branch(self.path, verbose=self.verbose)
+
+        output = self.__command(
+            "Add remote",
+            [
+                "git",
+                "rev-parse",
+                "--abbrev-ref",
+                "HEAD",
+            ])
+
+        branch = output.strip().strip("\n")
+
         return branch
 
-    def push(self, remote: str = "origin", branch=None):
+    def push(self, remote: str = "origin", branch=None, force=False):
+
         if branch is None:
             branch = self.current_branch()
-        git_push(self.path, branch, remote, verbose=self.verbose)
+
+        return self.__command(
+            "Add remote",
+            [
+                "git",
+                "push",
+                remote,
+                branch,
+            ] + (["--force"] if force else []))
 
     def ls_files(self, sources, include_deleted=False, path=None):
 
