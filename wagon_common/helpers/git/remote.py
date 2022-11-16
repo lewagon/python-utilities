@@ -123,7 +123,7 @@ def git_remote_show_head_branch(path, remote="origin", verbose=False):
     # show remote
     command = f"git remote show {remote}".split()
 
-    output = manage_command("Show git remote", command, verbose=verbose)
+    output = manage_command("Show git remote", command, cwd=path, verbose=verbose)
 
     # filter output
     head_branch = [line for line in output if "HEAD branch:" in line][0]
