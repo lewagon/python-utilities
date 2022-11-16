@@ -79,7 +79,7 @@ class TestGhRepo():
         exception_catched = False
 
         try:
-            GhRepo("Le-Wagon-QA/data-solutions", token=token).delete()
+            GhRepo("le-wagon-qa/data-solutions", token=token).delete()
         except NameError:
             exception_catched = True
 
@@ -93,7 +93,7 @@ class TestGhRepo():
         # Arrange
 
         # Act
-        repo = GhRepo("Le-Wagon-QA/automated-test", token=token)
+        repo = GhRepo("le-wagon-qa/automated-test", token=token)
         create_response = repo.create()
         get_response = repo.get()
         update_response = repo.update(dict(description="automated update test"))

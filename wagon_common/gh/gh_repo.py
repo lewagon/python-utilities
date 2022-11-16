@@ -17,7 +17,7 @@ class GhRepo:
         - repo: push commits TBC
         - admin:org: create repos TBC
         - workflow: push commits containing `.github/workflows/*.yml` files
-        - delete_repo: delete `lewagon-test` and `Le-Wagon-QA` repositories
+        - delete_repo: delete `lewagon-test` and `le-wagon-qa` repositories
         """
 
         self.name, self.owner, self.repo = self.__identify(name)
@@ -116,7 +116,7 @@ class GhRepo:
         """
 
         # protect production repositories
-        if self.owner not in ["lewagon-test", "Le-Wagon-QA"]:
+        if self.owner.lower() not in ["lewagon-test", "le-wagon-qa"]:
             raise NameError(f"cannot delete repo in {self.owner} production organisation")
 
         if dry_run:
