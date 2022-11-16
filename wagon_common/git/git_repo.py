@@ -2,6 +2,7 @@
 from wagon_common.gh.gh_repo import GhRepo
 
 from wagon_common.helpers.git.repo import get_git_top_level_directory
+from wagon_common.helpers.git.clone import clone_repo
 from wagon_common.helpers.git.create import git_init, git_add, git_commit
 from wagon_common.helpers.git.remote import git_remote_add, git_remote_show_head_branch
 from wagon_common.helpers.git.push import git_push
@@ -32,6 +33,11 @@ class GitRepo:
             path=self.path)
 
         return tld
+
+    def clone(self, url: Union[str, GhRepo]):
+        if isinstance(url, GhRepo):
+            url = GhRepo.ssh_url
+        clone_repo(url, self.path, verbose=self.verbose)
 
     def init(self):
         git_init(self.path)
