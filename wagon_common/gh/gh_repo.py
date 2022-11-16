@@ -156,7 +156,7 @@ class GhRepo:
         index = 0
         max_tries = 12  # wait 1 mn max
 
-        green(f"Wait for the creation of the {self.name} repo")
+        green(f"\nWait for the creation of the {self.name} repo")
 
         while repo is None and index < max_tries:
 
