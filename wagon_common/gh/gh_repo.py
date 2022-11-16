@@ -151,7 +151,12 @@ class GhRepo:
 
         repo = None
 
-        while repo is None:
+        index = 0
+        max_tries = 12  # wait 1 mn max
+
+        while repo is None and index < max_tries:
+
+            index += 1
 
             # check if repo exists
             repo = self.get()
