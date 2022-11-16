@@ -2,7 +2,7 @@
 from wagon_common.gh.gh_repo import GhRepo
 
 from wagon_common.helpers.git.repo import get_git_top_level_directory
-from wagon_common.helpers.git.create import git_init, git_commit
+from wagon_common.helpers.git.create import git_init, git_add, git_commit
 from wagon_common.helpers.git.remote import git_remote_add, git_remote_show_head_branch
 from wagon_common.helpers.git.push import git_push
 from wagon_common.helpers.git.ls import list_git_controlled_files
@@ -36,13 +36,16 @@ class GitRepo:
     def init(self):
         git_init(self.path)
 
+    def add(self):
+        git_add(self.path)
+
     def commit(self, message: str):
         git_commit(self.path, message)
 
-    def remote_add(self, url: Union[str, GhRepo], name: str = "origin"):
+    def remote_add(self, url: Union[str, GhRepo], remote: str = "origin"):
         if isinstance(url, GhRepo):
             url = GhRepo.ssh_url
-        git_remote_add(self.path, name, url)
+        git_remote_add(self.path, remote, url)
 
     def remote_head_branch(self, remote: str = "origin"):
         return git_remote_show_head_branch(
@@ -50,7 +53,7 @@ class GitRepo:
             remote=remote,
             verbose=self.verbose)
 
-    def push(self, remote="origin", branch=None):
+    def push(self, remote: str = "origin", branch=None):
         if branch is None:
             branch = self.remote_head_branch(remote)
         git_push(self.path, branch, remote)
