@@ -67,6 +67,7 @@ class GhRepo:
 
         params["org"] = self.owner
         params["name"] = self.repo
+        params["private"] = True
 
         request = dict(
             url=f"{self.base_url}/orgs/{self.owner}/repos",
