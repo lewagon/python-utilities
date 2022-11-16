@@ -59,13 +59,15 @@ class GitRepo:
                 ".",
             ] + (["--quiet"] if quiet else []))
 
-    def init(self):
+    def init(self, initial_branch="master"):
 
         return self.__command(
             "Initialize git repo",
             [
                 "git",
-                "init"
+                "init",
+                "--initial-branch",
+                initial_branch
             ])
 
     def add(self):
