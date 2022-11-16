@@ -21,6 +21,8 @@ class GhRepo:
         """
 
         self.name, self.owner, self.repo = self.__identify(name)
+        self.ssh_url = f"git@github.com:{self.owner}/{self.repo}.git"
+        self.https_url = f"https://github.com/{self.owner}/{self.repo}.git"
         self.headers = dict(Authorization=f"token {token}")
         self.is_org = is_org
         self.verbose = verbose
