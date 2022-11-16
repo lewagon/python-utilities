@@ -145,7 +145,7 @@ class GitRepo:
 
         return branch
 
-    def push(self, remote: str = "origin", branch=None, force=False):
+    def push(self, remote: str = "origin", branch=None, set_upstream=False, force=False):
 
         # if branch is None:
         #     branch = self.current_branch()
@@ -157,6 +157,7 @@ class GitRepo:
                 "push",
                 remote,
             ] + ([branch] if branch is not None else [])
+            + (["--set-upstream"] if set_upstream is not None else [])
             + (["--force"] if force else []))
 
     def ls_files(self, sources, include_deleted=False, path=None):
