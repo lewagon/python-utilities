@@ -215,7 +215,7 @@ class GitRepo:
         return files
 
 
-if __name__ == '__master__':
+if __name__ == '__main__':
 
     repo = GitRepo(__file__, verbose=True)
     repo.tld
