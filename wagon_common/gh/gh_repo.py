@@ -53,8 +53,8 @@ class GhRepo:
         """
 
         red(f"\nGH api error in {context} 🤕",
-            f"\n- url: {request.url}"
-            + f"\n- params: {request.json}"
+            f"\n- url: {request["url"]}"
+            + f"\n- params: {request["json"]}"
             + f"\n- status code: {response.status_code}"
             + f"\n- response: {response.content}")
 
