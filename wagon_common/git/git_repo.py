@@ -81,7 +81,7 @@ class GitRepo:
                 email
             ])
 
-    def init(self, initial_branch="main"):
+    def init(self, initial_branch="master"):
 
         return self.__command(
             "Initialize git repo",
@@ -102,7 +102,7 @@ class GitRepo:
                 "--all"
             ])
 
-    def checkout(self, branch="main"):
+    def checkout(self, branch="master"):
 
         return self.__command(
             "Checkout branch",
@@ -113,7 +113,7 @@ class GitRepo:
                 branch
             ])
 
-    def set_branch(self, branch="main"):
+    def set_branch(self, branch="master"):
 
         return self.__command(
             "Checkout branch",
@@ -159,7 +159,7 @@ class GitRepo:
                 "error: remote origin already exists"
             ])
 
-    def set_remote_branch(self, remote: str = "origin", branch: str = "main"):
+    def set_remote_branch(self, remote: str = "origin", branch: str = "master"):
 
         return self.__command(
             "Set remote branch",
@@ -215,7 +215,7 @@ class GitRepo:
         return files
 
 
-if __name__ == '__main__':
+if __name__ == '__master__':
 
     repo = GitRepo(__file__, verbose=True)
     repo.tld
