@@ -94,10 +94,13 @@ class GitRepo:
                 "nothing to commit, working tree clean"
             ])
 
-    def remote_add(self, url: Union[str, GhRepo], remote: str = "origin"):
+    def remote_add(self, url: Union[str, GhRepo], remote: str = "origin", https=False):
 
         if isinstance(url, GhRepo):
-            url = url.ssh_url
+            if https:
+                url = url.https_url
+            else:
+                url = url.ssh_url
 
         return self.__command(
             "Add remote",
