@@ -76,7 +76,7 @@ def manage_command(desc, command, valid_errors=[], cwd=None, show_progress=False
 
             raise ValueError("Error running command")
 
-    return output.decode("utf-8")
+    return output
 
 
 # # ipython test:
