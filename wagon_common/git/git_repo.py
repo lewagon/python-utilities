@@ -147,8 +147,8 @@ class GitRepo:
 
     def push(self, remote: str = "origin", branch=None, force=False):
 
-        if branch is None:
-            branch = self.current_branch()
+        # if branch is None:
+        #     branch = self.current_branch()
 
         return self.__command(
             "Push commits",
@@ -156,8 +156,8 @@ class GitRepo:
                 "git",
                 "push",
                 remote,
-                branch,
-            ] + (["--force"] if force else []))
+            ] + ([branch] if branch is not None else [])
+            + (["--force"] if force else []))
 
     def ls_files(self, sources, include_deleted=False, path=None):
 
