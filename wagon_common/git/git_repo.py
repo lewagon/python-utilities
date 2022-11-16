@@ -59,6 +59,28 @@ class GitRepo:
                 ".",
             ] + (["--quiet"] if quiet else []))
 
+    def config_user_name(self, name: str = "github-actions"):
+
+        return self.__command(
+            "Config git user name",
+            [
+                "git",
+                "config",
+                "user.email",
+                name
+            ])
+
+    def config_user_email(self, email: str = "github-actions@github.com"):
+
+        return self.__command(
+            "Config git user email",
+            [
+                "git",
+                "config",
+                "user.email",
+                email
+            ])
+
     def init(self, initial_branch="master"):
 
         return self.__command(
