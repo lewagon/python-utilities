@@ -1,7 +1,7 @@
 
 import requests
 
-import time
+from threading import Event
 
 from wagon_common.helpers.output import red
 
@@ -161,5 +161,5 @@ class GhRepo:
             # check if repo exists
             repo = self.get()
 
-            # wait 5 more seconds for repo to be created
-            time.sleep(5)
+            # wait 5 more seconds for repo to be created (non blocking)
+            Event().wait(5)
