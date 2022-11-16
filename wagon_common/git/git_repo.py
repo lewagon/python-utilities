@@ -7,6 +7,8 @@ from wagon_common.helpers.git.remote import git_remote_add, git_remote_show_head
 from wagon_common.helpers.git.push import git_push
 from wagon_common.helpers.git.ls import list_git_controlled_files
 
+from typing import Union
+
 from functools import cached_property
 
 
@@ -37,7 +39,7 @@ class GitRepo:
     def commit(self, message: str):
         git_commit(self.path, message)
 
-    def remote_add(self, url: str, name: str = "origin"):
+    def remote_add(self, url: Union[str, GhRepo], name: str = "origin"):
         if isinstance(url, GhRepo):
             url = GhRepo.ssh_url
         git_remote_add(self.path, name, url)
