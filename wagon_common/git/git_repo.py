@@ -23,11 +23,12 @@ class GitRepo:
         self.path = path                # repo tld
         self.verbose = verbose
 
-    def __command(self, desc, command):
+    def __command(self, desc, command, valid_errors=[]):
 
         return manage_command(
             desc,
             command,
+            valid_errors,
             cwd=self.path,              # run commands at the repo tld
             show_progress=True,         # show commands output as it occurs
             verbose=self.verbose)       # show commands being ran
@@ -62,6 +63,9 @@ class GitRepo:
             [
                 "git",
                 "init"
+            ],
+            [
+                "nothing to commit, working tree clean"
             ])
 
     def add(self):

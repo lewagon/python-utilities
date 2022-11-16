@@ -46,24 +46,35 @@ def run_command(command, cwd=None, input_bytes=None, show_progress=False, verbos
     return rc, output.encode() + com_output, error
 
 
-def manage_command(desc, command, cwd=None, show_progress=False, verbose=False):
+def manage_command(desc, command, valid_errors=[], cwd=None, show_progress=False, verbose=False):
     """
     run command in subprocess and return output
     """
 
     green(f"\n{desc}")
 
-    rc, output, error = run_command(command, cwd=cwd, show_progress=show_progress, verbose=verbose)
+    rc, raw_output, error = run_command(command, cwd=cwd, show_progress=show_progress, verbose=verbose)
+
+    output = raw_output.decode("utf-8")
 
     if rc != 0:
 
-        red("\nError running command 🤕",
-            f"\n- command {command}"
-            + f"\n- rc {rc}"
-            + f"\n- output {output}"
-            + f"\n- error {error}")
+        # check if output contains a valid error (ie `rc != 0` is not an issue)
+        valid_error = False
+        for valid_error in valid_errors:
+            if valid_error in raw_output:
+                valid_error = True
+                break
 
-        raise ValueError("Error running command")
+        if not valid_error:
+
+            red("\nError running command 🤕",
+                f"\n- command {command}"
+                + f"\n- rc {rc}"
+                + f"\n- output {output}"
+                + f"\n- error {error}")
+
+            raise ValueError("Error running command")
 
     return output.decode("utf-8")
 
