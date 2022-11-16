@@ -10,6 +10,7 @@ class GhRepo:
     """
 
     base_url = "https://api.github.com"
+    default_path = f"/repos/{self.owner}/{self.repo}"
 
     def __init__(self, name, token=None, is_org=True, verbose=False):
         """
@@ -21,7 +22,6 @@ class GhRepo:
         """
 
         self.name, self.owner, self.repo = self.__identify(name)
-        self.default_path = f"/repos/{self.owner}/{self.repo}"
         self.token = token
         self.is_org = is_org
         self.verbose = verbose
