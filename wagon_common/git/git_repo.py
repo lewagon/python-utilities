@@ -1,5 +1,9 @@
 
+from wagon_common.gh.gh_repo import GhRepo
+
 from wagon_common.helpers.git.repo import get_git_top_level_directory
+from wagon_common.helpers.git.create import git_init, git_commit
+from wagon_common.helpers.git.remote import git_remote_add
 from wagon_common.helpers.git.ls import list_git_controlled_files
 
 from functools import cached_property
@@ -25,6 +29,17 @@ class GitRepo:
             path=self.path)
 
         return tld
+
+    def init(self):
+        git_init(self.path)
+
+    def commit(self, message: str):
+        git_commit(self.path, message)
+
+    def remote_add(self, url: str, name: str = "origin"):
+        if isinstance(url, GhRepo):
+            url = GhRepo.ssh_url
+        git_remote_add(self.path, name, url)
 
     def ls_files(self, sources, include_deleted=False, path=None):
 
