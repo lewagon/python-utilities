@@ -6,6 +6,7 @@ from wagon_common.helpers.subprocess import manage_command
 from wagon_common.helpers.git.repo import get_git_top_level_directory
 from wagon_common.helpers.git.ls import list_git_controlled_files
 
+import os
 from typing import Union
 
 from functools import cached_property
@@ -46,6 +47,8 @@ class GitRepo:
 
         if isinstance(url, GhRepo):
             url = url.ssh_url
+
+        os.makedirs(self.path, exist_ok=True)
 
         return self.__command(
             "Clone git repo",
