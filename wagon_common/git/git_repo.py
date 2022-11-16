@@ -115,6 +115,18 @@ class GitRepo:
                 "error: remote origin already exists"
             ])
 
+    def set_remote_branch(self, remote: str = "origin", branch: str = "master"):
+
+        return self.__command(
+            "Set remote branch",
+            [
+                "git",
+                "push",
+                "-u",
+                remote,
+                branch
+            ])
+
     def current_branch(self):
         """
         requires a first commit to be added after `git init`
