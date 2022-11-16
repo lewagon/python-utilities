@@ -93,6 +93,10 @@ class GhRepo:
 
         response = requests.get(**request)
 
+        # check if repo exists
+        if response.status_code == 404:
+            return None  # repo does not exist
+
         if response.status_code != 200:
             self.__error(request, response, "repo get")
 
@@ -145,16 +149,12 @@ class GhRepo:
         the use case is having a gha create the repo and waiting for its creation
         """
 
-        while True:
+        repo = None
+
+        while repo is None:
 
             # check if repo exists
-            try:
-                self.get()
-            except NameError as e:
-                if "GH api error" not in str(e):
-                    raise  # rethrow exception
-            finally:
-                break  # repo exists
+            repo = self.get()
 
             # wait 5 more seconds for repo to be created
             time.sleep(5)
