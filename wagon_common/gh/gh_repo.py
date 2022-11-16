@@ -1,6 +1,8 @@
 
 import requests
 
+import time
+
 from wagon_common.helpers.output import red
 
 
@@ -134,3 +136,23 @@ class GhRepo:
 
         if response.status_code != 204:
             self.__error(request, response, "repo delete")
+
+    def wait_for_creation(self):
+        """
+        wait until the repo is created
+        the use case is having a gha create the repo and waiting for its creation
+        """
+
+        while True:
+
+            # check if repo exists
+            try:
+                self.get()
+            except NameError as e:
+                if "GH api error" not in str(e):
+                    raise  # rethrow exception
+            finally:
+                break  # repo exists
+
+            # wait 5 more seconds for repo to be created
+            time.sleep(5)
