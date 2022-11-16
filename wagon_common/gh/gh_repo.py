@@ -154,7 +154,7 @@ class GhRepo:
         repo = None
 
         index = 0
-        max_tries = 12  # 1 minute
+        max_tries = 12 * 3  # 3 minutes
 
         green(f"\nWait for the creation of the {self.name} repo")
 
