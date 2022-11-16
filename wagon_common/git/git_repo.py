@@ -78,7 +78,7 @@ class GitRepo:
                 "--all"
             ])
 
-    def commit(self, message: str):
+    def commit(self, message: str, allow_empty=False):
 
         return self.__command(
             "Commit content in the staging zone",
@@ -86,8 +86,8 @@ class GitRepo:
                 "git",
                 "commit",
                 "-m",
-                message
-            ],
+                message,
+            ] + (["--allow_empty"] if allow_empty else []),
             [
                 "nothing to commit, working tree clean"
             ])
