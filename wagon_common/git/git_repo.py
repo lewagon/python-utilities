@@ -63,9 +63,6 @@ class GitRepo:
             [
                 "git",
                 "init"
-            ],
-            [
-                "nothing to commit, working tree clean"
             ])
 
     def add(self):
@@ -87,6 +84,9 @@ class GitRepo:
                 "commit",
                 "-m",
                 message
+            ],
+            [
+                "nothing to commit, working tree clean"
             ])
 
     def remote_add(self, url: Union[str, GhRepo], remote: str = "origin"):
