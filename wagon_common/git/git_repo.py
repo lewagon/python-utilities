@@ -113,6 +113,17 @@ class GitRepo:
                 branch
             ])
 
+    def set_branch(self, branch="master"):
+
+        return self.__command(
+            "Checkout branch",
+            [
+                "git",
+                "branch",
+                "-M",
+                branch
+            ])
+
     def commit(self, message: str, allow_empty=False):
 
         return self.__command(
