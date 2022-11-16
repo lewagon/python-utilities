@@ -48,7 +48,7 @@ class GitRepo:
             url = url.ssh_url
 
         return self.__command(
-            "Initialize git repo",
+            "Clone git repo",
             [
                 "git",
                 "clone",
@@ -110,7 +110,7 @@ class GitRepo:
     def current_branch(self):
 
         output = self.__command(
-            "Add remote",
+            "Get current remote",
             [
                 "git",
                 "rev-parse",
@@ -128,7 +128,7 @@ class GitRepo:
             branch = self.current_branch()
 
         return self.__command(
-            "Add remote",
+            "Push commits",
             [
                 "git",
                 "push",
