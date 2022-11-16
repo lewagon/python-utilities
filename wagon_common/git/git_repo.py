@@ -102,6 +102,9 @@ class GitRepo:
                 "add",
                 remote,
                 url
+            ],
+            [
+                "error: remote origin already exists"
             ])
 
     def current_branch(self):
