@@ -5,14 +5,14 @@ git push cli helpers
 from wagon_common.helpers.subprocess import run_command
 
 
-def git_push(path, branch, force=False, verbose=False):
+def git_push(path, branch, remote="origin", force=False, verbose=False):
     """ push git repo """
 
     # push git repo
     command = [
         "git",
         "push",
-        "origin",
+        remote,
         branch,
         ] + (["--force"] if force else [])
 
