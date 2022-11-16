@@ -111,6 +111,9 @@ class GitRepo:
             ])
 
     def current_branch(self):
+        """
+        requires a first commit to be added after `git init`
+        """
 
         output = self.__command(
             "Get current branch",
