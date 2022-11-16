@@ -40,18 +40,18 @@ class GitRepo:
         clone_repo(url, self.path, verbose=self.verbose)
 
     def init(self):
-        git_init(self.path)
+        git_init(self.path, verbose=self.verbose)
 
     def add(self):
-        git_add(self.path)
+        git_add(self.path, verbose=self.verbose)
 
     def commit(self, message: str):
-        git_commit(self.path, message)
+        git_commit(self.path, message, verbose=self.verbose)
 
     def remote_add(self, url: Union[str, GhRepo], remote: str = "origin"):
         if isinstance(url, GhRepo):
             url = GhRepo.ssh_url
-        git_remote_add(self.path, remote, url)
+        git_remote_add(self.path, remote, url, verbose=self.verbose)
 
     def remote_head_branch(self, remote: str = "origin"):
         return git_remote_show_head_branch(
@@ -62,7 +62,7 @@ class GitRepo:
     def push(self, remote: str = "origin", branch=None):
         if branch is None:
             branch = self.remote_head_branch(remote)
-        git_push(self.path, branch, remote)
+        git_push(self.path, branch, remote, verbose=self.verbose)
 
     def ls_files(self, sources, include_deleted=False, path=None):
 
