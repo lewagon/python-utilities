@@ -154,7 +154,7 @@ class GhRepo:
         repo = None
 
         index = 0
-        max_tries = 12  # wait 1 mn max
+        max_tries = 3
 
         green(f"\nWait for the creation of the {self.name} repo")
 
@@ -169,3 +169,6 @@ class GhRepo:
 
             # wait 5 more seconds for repo to be created (non blocking)
             Event().wait(5)
+
+        if repo is None:
+            raise NameError(f"repo in {self.name} was not created")
