@@ -1,6 +1,8 @@
 
 import requests
 
+from wagon_common.helpers.output import green
+
 from threading import Event
 
 from wagon_common.helpers.output import red
@@ -154,12 +156,16 @@ class GhRepo:
         index = 0
         max_tries = 12  # wait 1 mn max
 
+        green(f"Wait for the creation of the {self.name} repo")
+
         while repo is None and index < max_tries:
 
             index += 1
 
             # check if repo exists
             repo = self.get()
+
+            print("Wait for 5 seconds...")
 
             # wait 5 more seconds for repo to be created (non blocking)
             Event().wait(5)
