@@ -102,6 +102,17 @@ class GitRepo:
                 "--all"
             ])
 
+    def checkout(self, branch="master"):
+
+        return self.__command(
+            "Checkout branch",
+            [
+                "git",
+                "checkout",
+                "-b",
+                branch
+            ])
+
     def commit(self, message: str, allow_empty=False):
 
         return self.__command(
