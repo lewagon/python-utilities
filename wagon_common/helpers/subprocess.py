@@ -51,7 +51,7 @@ def manage_command(desc, command, cwd=None, show_progress=False, verbose=False):
     run command in subprocess and return output
     """
 
-    green(desc)
+    green(f"\n{desc}")
 
     rc, output, error = run_command(command, cwd=cwd, show_progress=show_progress, verbose=verbose)
 
