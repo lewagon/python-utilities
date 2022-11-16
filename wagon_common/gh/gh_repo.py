@@ -134,7 +134,8 @@ class GhRepo:
 
         response = requests.delete(**request)
 
-        if response.status_code != 204:
+        # checking whether repo was deleted or did not exist
+        if response.status_code != 204 and response.status_code != 404:
             self.__error(request, response, "repo delete")
 
     def wait_for_creation(self):
