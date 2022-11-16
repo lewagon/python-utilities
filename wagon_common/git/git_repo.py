@@ -119,6 +119,7 @@ class GitRepo:
                 "rev-parse",
                 "--abbrev-ref",
                 "HEAD",
+                "--"
             ])
 
         branch = output.strip().strip("\n")
