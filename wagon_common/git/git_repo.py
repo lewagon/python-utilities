@@ -110,7 +110,7 @@ class GitRepo:
     def current_branch(self):
 
         output = self.__command(
-            "Get current remote",
+            "Get current branch",
             [
                 "git",
                 "rev-parse",
