@@ -36,7 +36,7 @@ class GitRepo:
 
     def clone(self, url: Union[str, GhRepo]):
         if isinstance(url, GhRepo):
-            url = GhRepo.ssh_url
+            url = url.ssh_url
         clone_repo(url, self.path, verbose=self.verbose)
 
     def init(self):
@@ -50,7 +50,7 @@ class GitRepo:
 
     def remote_add(self, url: Union[str, GhRepo], remote: str = "origin"):
         if isinstance(url, GhRepo):
-            url = GhRepo.ssh_url
+            url = url.ssh_url
         git_remote_add(self.path, remote, url, verbose=self.verbose)
 
     def remote_head_branch(self, remote: str = "origin"):
