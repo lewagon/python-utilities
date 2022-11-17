@@ -66,7 +66,7 @@ class GitRepo:
             [
                 "git",
                 "config",
-                "user.email",
+                "user.name",
                 name
             ])
 
