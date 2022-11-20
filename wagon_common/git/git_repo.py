@@ -46,7 +46,7 @@ class GitRepo:
     def clone(self, url: Union[str, GhRepo], quiet=False):
 
         if isinstance(url, GhRepo):
-            url = url.https_url
+            url = url.https_url  # contains credentials
 
         os.makedirs(self.path, exist_ok=True)
 
@@ -138,13 +138,10 @@ class GitRepo:
                 "nothing to commit, working tree clean"
             ])
 
-    def remote_add(self, url: Union[str, GhRepo], remote: str = "origin", https=False):
+    def remote_add(self, url: Union[str, GhRepo], remote: str = "origin"):
 
         if isinstance(url, GhRepo):
-            if https:
-                url = url.https_url
-            else:
-                url = url.ssh_url
+            url = url.https_url  # contains credentials
 
         return self.__command(
             "Add remote",

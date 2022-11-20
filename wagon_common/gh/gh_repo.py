@@ -22,6 +22,8 @@ class GhRepo:
         - admin:org: create repos TBC
         - workflow: push commits containing `.github/workflows/*.yml` files
         - delete_repo: delete `lewagon-test` and `lewagon-qa` repositories
+
+        TODO: ssh credentials require additional setup
         """
 
         self.name, self.owner, self.repo = self.__identify(name)
