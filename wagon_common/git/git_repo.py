@@ -46,7 +46,7 @@ class GitRepo:
     def clone(self, url: Union[str, GhRepo], quiet=False):
 
         if isinstance(url, GhRepo):
-            url = url.ssh_url
+            url = url.https_url
 
         os.makedirs(self.path, exist_ok=True)
 
