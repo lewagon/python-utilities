@@ -11,19 +11,16 @@ class GitHubRepo:
     allows to handle repo url from parameters and vice versa
     """
 
-    def __init__(self, org: str, repo: str,
-                 username: str = None, token: str = None):
+    def __init__(self, org: str, repo: str, token: str = None):
 
         self.org = org
         self.repo = repo
-        self.username = username
         self.token = token
 
         self.fullname = f"{org}/{repo}"
 
         self.url = github_url(
             fullname=self.fullname,
-            username=username,
             token=token)
 
     @classmethod
@@ -66,21 +63,20 @@ class GitHubRepo:
             raise Exception(f"Unable to clone repo: {self.url}, {path}")
 
 
-def github_url(fullname, username="git", token=None):
+def github_url(fullname, token=None):
     """
     build gh repo url
     formats:
-    - https://git@github.com/{org}/{repo}
-    - https://{username}@github.com/{org}/{repo}
-    - https://{username}:{token}@github.com/{org}/{repo}
+    - https://github.com/{org}/{repo}
+    - https://{token}@github.com/{org}/{repo}
+    # - https://git@github.com/{org}/{repo}
+    # - https://{username}@github.com/{org}/{repo}
+    # - https://{username}:{token}@github.com/{org}/{repo}
     """
 
-    auth = "git" if username is None else username
+    auth = f"{token}@" if token is not None else ""
 
-    if token is not None:
-        auth += f":{token}"
-
-    repo_url = f"https://{auth}@github.com/{fullname}"
+    repo_url = f"https://{auth}github.com/{fullname}"
 
     return repo_url
 
@@ -119,9 +115,3 @@ def extract_gnn_repo_from_github_url(url):
         extracted_repo = extracted_repo[:-4]
 
     return extracted_gnn, extracted_repo
-
-
-if __name__ == '__main__':
-
-    print(github_url("lewagon/setup"))
-    print(github_url("lewagon/setup", "gnn", "token"))

@@ -68,18 +68,18 @@ class TestGitHubRepo():
         # Act
 
         # Assert
-        assert data_solutions.url == "https://git@github.com/lewagon/data-solutions"
+        assert data_solutions.url == "https://github.com/lewagon/data-solutions"
 
         # Cleanup
 
     def test_repo_creation_auth(self):
 
         # Arrange
-        authed_data_so = GitHubRepo("lewagon", "data-solutions", "user", "token")
+        authed_data_so = GitHubRepo("lewagon", "data-solutions", "token")
 
         # Act
 
         # Assert
-        assert authed_data_so.url == "https://user:token@github.com/lewagon/data-solutions"
+        assert authed_data_so.url == "https://token@github.com/lewagon/data-solutions"
 
         # Cleanup

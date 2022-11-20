@@ -40,7 +40,7 @@ class TestGhRepo():
         assert repo.name == "lewagon-test/data-solutions"
 
         assert repo.ssh_url == f"git@github.com:{repo.owner}/{repo.repo}.git"
-        assert repo.https_url == f"https://github.com/{repo.owner}/{repo.repo}.git"
+        assert repo.https_url == f"https://None@github.com/{repo.owner}/{repo.repo}.git"
 
         assert lw_repo.owner == "lewagon"
         assert lw_repo.repo == "myriad"
