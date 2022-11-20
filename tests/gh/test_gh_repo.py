@@ -18,7 +18,7 @@ class TestGhRepo():
 
         # Arrange
         load_dotenv(find_dotenv())
-        token = os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN")
+        token = os.environ.get("GH_API_DELETE_TOKEN")
 
         # Act & Assert
         yield token
