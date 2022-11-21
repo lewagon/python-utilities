@@ -7,6 +7,7 @@ from wagon_common.helpers.git.repo import get_git_top_level_directory
 from wagon_common.helpers.git.ls import list_git_controlled_files
 
 import os
+import shutil
 from typing import Union
 
 from functools import cached_property
@@ -58,6 +59,10 @@ class GitRepo:
                 url,
                 ".",
             ] + (["--quiet"] if quiet else []))
+
+    def delete_git_dir(self):
+
+        shutil.rmtree(os.path.join(self.path, ".git"), ignore_errors=True)
 
     def init(self, initial_branch="master"):
 
