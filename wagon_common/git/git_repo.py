@@ -123,28 +123,7 @@ class GitRepo:
                 "error: remote origin already exists"
             ])
 
-    def current_branch(self):
-        """
-        requires a first commit to be added after `git init`
-        """
-
-        output = self.__command(
-            "Get current branch",
-            [
-                "git",
-                "rev-parse",
-                "--abbrev-ref",
-                "HEAD"
-            ])
-
-        branch = output.strip().strip("\n")
-
-        return branch
-
-    def push(self, remote: str = "origin", branch=None, force=False):
-
-        # if branch is None:
-        #     branch = self.current_branch()
+    def push(self, remote: str = "origin", branch="master", force=False):
 
         return self.__command(
             "Push commits",
@@ -152,8 +131,8 @@ class GitRepo:
                 "git",
                 "push",
                 remote,
-            ] + ([branch] if branch is not None else [])
-            + (["--force"] if force else []))
+                branch
+            ] + (["--force"] if force else []))
 
     def ls_files(self, sources, include_deleted=False, path=None):
 
