@@ -91,17 +91,6 @@ class GitRepo:
                 branch
             ])
 
-    def set_branch(self, branch="master"):
-
-        return self.__command(
-            "Checkout branch",
-            [
-                "git",
-                "branch",
-                "-M",
-                branch
-            ])
-
     def commit(self, message: str, allow_empty=False):
 
         return self.__command(
@@ -134,18 +123,6 @@ class GitRepo:
                 "error: remote origin already exists"
             ])
 
-    def set_remote_branch(self, remote: str = "origin", branch: str = "master"):
-
-        return self.__command(
-            "Set remote branch",
-            [
-                "git",
-                "push",
-                "-u",
-                remote,
-                branch
-            ])
-
     def current_branch(self):
         """
         requires a first commit to be added after `git init`
@@ -164,7 +141,7 @@ class GitRepo:
 
         return branch
 
-    def push(self, remote: str = "origin", branch=None, set_upstream=False, force=False):
+    def push(self, remote: str = "origin", branch=None, force=False):
 
         # if branch is None:
         #     branch = self.current_branch()
@@ -176,7 +153,6 @@ class GitRepo:
                 "push",
                 remote,
             ] + ([branch] if branch is not None else [])
-            + (["--set-upstream"] if set_upstream else [])
             + (["--force"] if force else []))
 
     def ls_files(self, sources, include_deleted=False, path=None):
