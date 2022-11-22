@@ -12,7 +12,7 @@ class GhRepo(GhApiBase):
     helper class for gh repo api
     """
 
-    def __init__(self, name, token, is_org=True, verbose=False, **kwargs):
+    def __init__(self, name, token=None, is_org=True, verbose=False, **kwargs):
         """
         required gh token scopes:
         - repo: push commits
