@@ -2,7 +2,7 @@
 from wagon_common.helpers.output import red
 
 
-class GhBase:
+class GhApiBase:
     """
     base class for gh api
     """

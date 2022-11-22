@@ -1,5 +1,5 @@
 
-from wagon_common.gh.gh_base import GhBase
+from wagon_common.gh.gh_api_base import GhApiBase
 from wagon_common.helpers.output import green
 
 import requests
@@ -7,7 +7,7 @@ import requests
 from threading import Event
 
 
-class GhRepo(GhBase):
+class GhRepo(GhApiBase):
     """
     helper class for gh repo api
     """
