@@ -15,8 +15,8 @@ class GhRepo(GhBase):
     def __init__(self, name, token, is_org=True, verbose=False):
         """
         required gh token scopes:
-        - repo: push commits TBC
-        - admin:org: create repos TBC
+        - repo: push commits
+        - admin:org: create repos
         - workflow: push commits containing `.github/workflows/*.yml` files
         - delete_repo: delete `lewagon-test` and `lewagon-qa` repositories
 
