@@ -19,7 +19,7 @@ class GhApiBase:
         self.headers = dict(Authorization=f"token {token}")
         self.verbose = verbose
 
-    def __error(self, request, response, context):
+    def error(self, request, response, context):
         """
         log api call and raise error
         """

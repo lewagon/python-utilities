@@ -65,7 +65,7 @@ class GhRepo(GhApiBase):
         response = requests.post(**request)
 
         if response.status_code != 201:
-            self.__error(request, response, "repo create")
+            self.error(request, response, "repo create")
 
         return response.json()
 
@@ -86,7 +86,7 @@ class GhRepo(GhApiBase):
             return None  # repo does not exist
 
         if response.status_code != 200:
-            self.__error(request, response, "repo get")
+            self.error(request, response, "repo get")
 
         return response.json()
 
@@ -103,7 +103,7 @@ class GhRepo(GhApiBase):
         response = requests.patch(**request)
 
         if response.status_code != 200:
-            self.__error(request, response, "repo update")
+            self.error(request, response, "repo update")
 
         return response.json()
 
@@ -129,7 +129,7 @@ class GhRepo(GhApiBase):
 
         # checking whether repo was deleted or did not exist
         if response.status_code != 204 and response.status_code != 404:
-            self.__error(request, response, "repo delete")
+            self.error(request, response, "repo delete")
 
     def wait_for_creation(self):
         """
