@@ -36,7 +36,7 @@ class GhOrg(GhApiBase):
         response = requests.get(**request)
 
         if response.status_code != 200:
-            self.error(request, response, "org secret list")
+            self.error(request, response, "org secrets list")
 
         return [GhOrgSecret(org=self.org, **secret, token=self.token, verbose=self.verbose)
                 for secret in response.json()["secrets"]]

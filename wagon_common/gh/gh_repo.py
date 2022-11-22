@@ -12,7 +12,7 @@ class GhRepo(GhApiBase):
     helper class for gh repo api
     """
 
-    def __init__(self, name, token, is_org=True, verbose=False):
+    def __init__(self, name, token, is_org=True, verbose=False, **kwargs):
         """
         required gh token scopes:
         - repo: push commits
@@ -29,6 +29,7 @@ class GhRepo(GhApiBase):
         self.ssh_url = f"git@github.com:{self.owner}/{self.repo}.git"
         self.https_url = f"https://{token}@github.com/{self.owner}/{self.repo}.git"
         self.is_org = is_org
+        self.kwargs = kwargs
 
     def __identify(self, name):
         """
