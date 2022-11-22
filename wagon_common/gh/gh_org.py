@@ -1,5 +1,6 @@
 
 from wagon_common.gh.gh_api_base import GhApiBase
+from wagon_common.gh.gh_org_secret import GhOrgSecret
 
 import requests
 
@@ -37,4 +38,5 @@ class GhOrg(GhApiBase):
         if response.status_code != 200:
             self.error(request, response, "org secret list")
 
-        return response.json()
+        return [GhOrgSecret(org=self.org, **secret, token=self.token, verbose=self.verbose)
+                for secret in response.json()["secrets"]]
