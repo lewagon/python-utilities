@@ -1,11 +1,9 @@
 
 import requests
 
-from wagon_common.helpers.output import green
+from wagon_common.helpers.output import red, green
 
 from threading import Event
-
-from wagon_common.helpers.output import red
 
 
 class GhRepo:
