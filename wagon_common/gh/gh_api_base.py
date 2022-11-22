@@ -16,6 +16,7 @@ class GhApiBase:
         - secrets: for apps
         """
 
+        self.token = token
         self.headers = dict(Authorization=f"token {token}")
         self.verbose = verbose
 
