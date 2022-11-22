@@ -1,17 +1,16 @@
 
-import requests
+from wagon_common.gh.gh_base import GhBase
+from wagon_common.helpers.output import green
 
-from wagon_common.helpers.output import red, green
+import requests
 
 from threading import Event
 
 
-class GhRepo:
+class GhRepo(GhBase):
     """
-    helper class for gh api calls
+    helper class for gh repo api
     """
-
-    base_url = "https://api.github.com"
 
     def __init__(self, name, token, is_org=True, verbose=False):
         """
@@ -24,12 +23,12 @@ class GhRepo:
         TODO: ssh credentials require additional setup
         """
 
+        super().__init__(token, verbose)
+
         self.name, self.owner, self.repo = self.__identify(name)
         self.ssh_url = f"git@github.com:{self.owner}/{self.repo}.git"
         self.https_url = f"https://{token}@github.com/{self.owner}/{self.repo}.git"
-        self.headers = dict(Authorization=f"token {token}")
         self.is_org = is_org
-        self.verbose = verbose
 
     def __identify(self, name):
         """
@@ -48,19 +47,6 @@ class GhRepo:
             name = f"{owner}/{repo}"
 
         return name, owner, repo
-
-    def __error(self, request, response, context):
-        """
-        log api call and raise error
-        """
-
-        red(f"\nGH api error in {context} 🤕",
-            f"\n- url: {request['url']}"
-            + f"\n- params: {request['json']}"
-            + f"\n- status code: {response.status_code}"
-            + f"\n- response: {response.content}")
-
-        raise ValueError("GH api error")
 
     def create(self, params={}):
         """
