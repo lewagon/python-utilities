@@ -30,6 +30,8 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
 
     # iterate through patterns
     results = []
+    inexisting_entries = []
+
     for pattern in patterns:
 
         if verbose:
@@ -40,7 +42,6 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
         # remove all sources that do not match the pattern
         filtered_sources = []
         ignored_files = []
-        inexisting_entries = []
 
         for source in sources:
 
@@ -100,7 +101,7 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
         results.append(sorted(set(res)))
 
     if return_inexisting:
-        return sum(results, []), inexisting_entries
+        return results, inexisting_entries
 
     return results
 

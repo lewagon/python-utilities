@@ -7,6 +7,12 @@ from gemfury with `~/.pip/pip.conf`:
 pip install wagon_common
 ```
 
+from a git branch:
+
+``` bash
+pip install git+https://@github.com/lewagon/python-utilities.git@branch-name
+```
+
 # uninstall
 
 ``` bash
