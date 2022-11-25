@@ -40,7 +40,7 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
         # remove all sources that do not match the pattern
         filtered_sources = []
         ignored_files = []
-        inexisting_files = []
+        inexisting_entries = []
 
         for source in sources:
 
@@ -72,7 +72,7 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
 
                 # the source does not exist
                 if return_inexisting:
-                    inexisting_files.append(source)
+                    inexisting_entries.append(source)
 
         if verbose:
             print_files("red", f"Files ignored for {pattern}", ignored_files)
@@ -81,7 +81,7 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
             print_files("blue", f"Files and directory patterns matching {pattern}", filtered_sources)
 
         if verbose and return_inexisting:
-            print_files("red", "Inexisting files", inexisting_files)
+            print_files("red", "Inexisting files or directories", inexisting_entries)
 
         if len(filtered_sources) > 0:
 
@@ -100,7 +100,7 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
         results.append(sorted(set(res)))
 
     if return_inexisting:
-        return sum(results, []), inexisting_files
+        return sum(results, []), inexisting_entries
 
     return results
 
