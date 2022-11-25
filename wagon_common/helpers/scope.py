@@ -70,7 +70,7 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
 
             else:
 
-                # the source is either an invalid argument or a deleted file
+                # the source does not exist
                 if return_inexisting:
                     inexisting_files.append(source)
 
@@ -81,7 +81,7 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
             print_files("blue", f"Files and directory patterns matching {pattern}", filtered_sources)
 
         if verbose and return_inexisting:
-            print_files("red", "Files inexisting or deleted", inexisting_files)
+            print_files("red", "Inexisting files", inexisting_files)
 
         if len(filtered_sources) > 0:
 
