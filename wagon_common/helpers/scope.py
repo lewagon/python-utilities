@@ -81,9 +81,6 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
         if verbose:
             print_files("blue", f"Files and directory patterns matching {pattern}", filtered_sources)
 
-        if verbose and return_inexisting:
-            print_files("red", "Inexisting files or directories", inexisting_entries)
-
         if len(filtered_sources) > 0:
 
             # list git controlled files within sources matching pattern
@@ -101,7 +98,13 @@ def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
         results.append(sorted(set(res)))
 
     if return_inexisting:
-        return results, inexisting_entries
+
+        unique_inexisting_entries = sorted(set(inexisting_entries))
+
+        if verbose:
+            print_files("red", "Inexisting files or directories", unique_inexisting_entries)
+
+        return results, unique_inexisting_entries
 
     return results
 
