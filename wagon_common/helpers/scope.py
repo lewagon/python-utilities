@@ -11,9 +11,10 @@ import glob
 from colorama import Fore, Style
 
 
-def resolve_scope(sources, patterns, verbose=False):
+def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
     """
     return sets of git controlled files within sources and matching patterns
+    return_inexisting returns a list of inexisting sources
     """
 
     if verbose:
@@ -30,6 +31,8 @@ def resolve_scope(sources, patterns, verbose=False):
 
     # iterate through patterns
     results = []
+    inexisting_entries = []
+
     for pattern in patterns:
 
         if verbose:
@@ -67,6 +70,12 @@ def resolve_scope(sources, patterns, verbose=False):
                     # source is ignored
                     ignored_files.append(source)
 
+            else:
+
+                # the source does not exist
+                if return_inexisting:
+                    inexisting_entries.append(source)
+
         if verbose:
             print_files("red", f"Files ignored for {pattern}", ignored_files)
 
@@ -88,6 +97,15 @@ def resolve_scope(sources, patterns, verbose=False):
 
         # append sorted unique results
         results.append(sorted(set(res)))
+
+    if return_inexisting:
+
+        unique_inexisting_entries = sorted(set(inexisting_entries))
+
+        if verbose:
+            print_files("red", "Inexisting files or directories", unique_inexisting_entries)
+
+        return results, unique_inexisting_entries
 
     return results
 
