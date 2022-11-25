@@ -67,24 +67,3 @@ def mv(source, destination, verbose=False):
 
     return rc == 0, output, error
 
-def rm(target, is_directory=False, verbose=False):
-    """
-    remove `target` file or folder
-    """
-
-    # remove target
-    command = [
-        "rm",
-        ] + (
-          ["-rf"] if is_directory else []
-        ) + [
-          target
-        ]
-
-    rc, output, error = run_command(command, verbose=verbose)
-
-    if verbose:
-        print(output.decode("utf-8"))
-
-    return rc == 0, output, error
-
