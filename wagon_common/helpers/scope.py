@@ -14,6 +14,7 @@ from colorama import Fore, Style
 def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
     """
     return sets of git controlled files within sources and matching patterns
+    return_inexisting returns a list of inexisting sources
     """
 
     if verbose:
