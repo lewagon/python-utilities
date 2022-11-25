@@ -11,7 +11,7 @@ import glob
 from colorama import Fore, Style
 
 
-def resolve_scope(sources, patterns, verbose=False):
+def resolve_scope(sources, patterns, return_inexisting=False, verbose=False):
     """
     return sets of git controlled files within sources and matching patterns
     """
@@ -40,7 +40,7 @@ def resolve_scope(sources, patterns, verbose=False):
         # remove all sources that do not match the pattern
         filtered_sources = []
         ignored_files = []
-        deleted_files = []
+        inexisting_files = []
 
         for source in sources:
 
@@ -70,8 +70,9 @@ def resolve_scope(sources, patterns, verbose=False):
 
             else:
 
-                # the source is likely a deleted file
-                deleted_files.append(source)
+                # the source is either an invalid argument or a deleted file
+                if return_inexisting:
+                    inexisting_files.append(source)
 
         if verbose:
             print_files("red", f"Files ignored for {pattern}", ignored_files)
@@ -79,8 +80,8 @@ def resolve_scope(sources, patterns, verbose=False):
         if verbose:
             print_files("blue", f"Files and directory patterns matching {pattern}", filtered_sources)
 
-        if verbose:
-            print_files("red", "Files and directories considered deleted", deleted_files)
+        if verbose and return_inexisting:
+            print_files("red", "Files inexisting or deleted", inexisting_files)
 
         if len(filtered_sources) > 0:
 
@@ -98,7 +99,10 @@ def resolve_scope(sources, patterns, verbose=False):
         # append sorted unique results
         results.append(sorted(set(res)))
 
-    return sum(results, []), deleted_files
+    if return_inexisting:
+        return sum(results, []), inexisting_files
+
+    return results
 
 
 if __name__ == '__main__':
