@@ -66,4 +66,3 @@ def mv(source, destination, verbose=False):
         print(output.decode("utf-8"))
 
     return rc == 0, output, error
-
