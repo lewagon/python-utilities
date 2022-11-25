@@ -5,8 +5,7 @@
 
 - Adds `GitRepo` and `GhRepo` helper classes
 - Adds tests for the `GhRepo` class
-
-# 0.2.9 (2022-11-25)
+- Adds `subblack`, `subred`, `subgreen`, `subyellow`, `subblue`, `submagenta`, `subcyan`, and `subwhite` helpers for `colorama`
 
 ### Added
 
