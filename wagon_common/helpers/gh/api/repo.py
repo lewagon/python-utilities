@@ -4,7 +4,7 @@ gh api repo cli helpers
 
 import requests
 
-from colorama import Fore, Style
+from wagon_common.helpers.output import red
 
 
 def gh_repo_list(fullname, token=None):
@@ -35,10 +35,8 @@ def gh_repo_list(fullname, token=None):
 
     if response.status_code != 200:
 
-        print(Fore.RED
-              + "\nUnable to get repository 🤕"
-              + Style.RESET_ALL
-              + f"\n- response: {response.content}")
+        red("\nUnable to get repository 🤕",
+            f"\n- response: {response.content}")
 
         return None
 
@@ -69,10 +67,8 @@ def gh_repo_rename(fullname, new_name, token):
 
     if response.status_code != 200:
 
-        print(Fore.RED
-              + "\nUnable to update repository name 🤕"
-              + Style.RESET_ALL
-              + f"\n- response: {response.content}")
+        red("\nUnable to update repository name 🤕",
+            f"\n- response: {response.content}")
 
 
 def gh_api_repo_create(org, name, token):
@@ -99,11 +95,9 @@ def gh_api_repo_create(org, name, token):
 
     if response.status_code != 201:
 
-        print(Fore.RED
-              + "\nUnable to create repository 🤕"
-              + Style.RESET_ALL
-              + f"\n- status code: {response.status_code}"
-              + f"\n- response: {response.content}")
+        red("\nUnable to create repository 🤕",
+            f"\n- status code: {response.status_code}"
+            + f"\n- response: {response.content}")
 
         return None
 
@@ -133,11 +127,9 @@ def gh_api_repo_update(org, name, token):
 
     if response.status_code != 200:
 
-        print(Fore.RED
-              + "\nUnable to update repository 🤕"
-              + Style.RESET_ALL
-              + f"\n- status code: {response.status_code}"
-              + f"\n- response: {response.content}")
+        red("\nUnable to update repository 🤕",
+            f"\n- status code: {response.status_code}"
+            + f"\n- response: {response.content}")
 
         return None
 

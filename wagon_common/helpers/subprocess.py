@@ -1,26 +1,23 @@
 
+from wagon_common.helpers.output import red, green, magenta
+
 import subprocess
 
-from colorama import Fore, Style
 
-
-def run_command(command, cwd=None, input_bytes=None, verbose=False):
+def run_command(command, cwd=None, input_bytes=None, show_progress=False, verbose=False):
     """
     Executes a command in a subprocess
     command - a terminal command as a list, ex. ['cp', 'file', 'folder']
     cwd - current working directory to execute the command in
     input_bytes - any input params to communicate to the command
+    show_progress - print command output as it occurs (for `gcloud compute ssh ...` commands)
 
     NOTE: commands run in 'bash' shell
     """
 
     if verbose:
-
-        print(Fore.MAGENTA
-              + "\nRunning `"
-              + "\"" + "\" \"".join(command) + "\""
-              + f"` in {cwd}"
-              + Style.RESET_ALL)
+        command_text = '"' + '" "'.join(command) + '"'
+        magenta(f"\nRunning `{command_text}` in {cwd}")
 
     p = subprocess.Popen(command,
                          cwd=cwd,                 # set current working directory
@@ -28,14 +25,53 @@ def run_command(command, cwd=None, input_bytes=None, verbose=False):
                          stdout=subprocess.PIPE,
                          stderr=subprocess.PIPE)
 
+    # show command output as it runs
+    output = ""
+    if show_progress:
+        for line in p.stdout:
+            decoded_line = line.decode("utf-8")
+            output += decoded_line
+            print(decoded_line, end="")
+
     # validate input
     if input_bytes is None:
         input_bytes = b""
 
     # get output and errors
-    output, error = p.communicate(input_bytes)  # binary input passed as parameter
+    com_output, error = p.communicate(input_bytes)  # binary input passed as parameter
 
     # get process return code
     rc = p.returncode
 
-    return rc, output, error
+    return rc, output.encode() + com_output, error
+
+
+def manage_command(desc, command, cwd=None, show_progress=False, verbose=False):
+    """
+    run command in subprocess and return output
+    """
+
+    green(desc)
+
+    rc, output, error = run_command(command, cwd=cwd, show_progress=show_progress, verbose=verbose)
+
+    if rc != 0:
+
+        red("\nError running command 🤕",
+            f"\n- command {command}"
+            + f"\n- rc {rc}"
+            + f"\n- output {output}"
+            + f"\n- error {error}")
+
+        raise ValueError("Error running command")
+
+    return output.decode("utf-8")
+
+
+# # ipython test:
+# from wagon_common.helpers.subprocess import manage_command
+# ssh_command = "gcloud compute ssh b2b-vm-vscode-setup --command"
+# command = "ls -la"
+# out = manage_command("Run ssh command", ssh_command.split() + [command], show_progress=True, verbose=True)
+# out
+# print(out)

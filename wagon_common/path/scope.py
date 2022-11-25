@@ -6,14 +6,13 @@ to a command ran in a git repository
 from wagon_common.git.git_repo import GitRepo
 
 from wagon_common.helpers.filter import (
-    list_files_matching_dirs,
     list_files_matching_pattern)
 from wagon_common.helpers.output import print_files
 
 from functools import cached_property
 import os
 
-from colorama import Fore, Style
+from wagon_common.helpers.output import red
 
 
 class Scope:
@@ -43,10 +42,8 @@ class Scope:
 
         if not self.sources:
 
-            print(Fore.RED
-                  + "\nNo files controlled by git in the scope 😶‍🌫️"
-                  + Style.RESET_ALL
-                  + "\nPlease make sure to `git add` any files that you want to use")
+            red("\nNo files controlled by git in the scope 😶‍🌫️",
+                "\nPlease make sure to `git add` any files that you want to use")
 
     def filter_ignored_patterns(self, patterns):
 
@@ -65,9 +62,7 @@ class Scope:
         # check scope git repo
         if scope.repo.tld is None:
 
-            print(Fore.RED
-                  + "\nCannot run command outside of a git repo 🙃"
-                  + Style.RESET_ALL)
+            red("\nCannot run command outside of a git repo 🙃")
 
             return None
 

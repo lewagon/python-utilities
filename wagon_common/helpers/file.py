@@ -5,8 +5,7 @@ cli helper
 import os
 import subprocess
 
-from colorama import Fore, Style
-
+from wagon_common.helpers.output import magenta
 from wagon_common.helpers.subprocess import run_command
 
 
@@ -37,12 +36,7 @@ def cp(source, destination, recursive=False, verbose=False):
         ]
 
     if verbose:
-
-        print(Fore.MAGENTA
-              + "\nRunning `"
-              + "\"" + "\" \"".join(command) + "\""
-              + "`"
-              + Style.RESET_ALL)
+        magenta('\nRunning `"' + '" "'.join(command) + '"`')
 
     # copy file
     subprocess.call(command)

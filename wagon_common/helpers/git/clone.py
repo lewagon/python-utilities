@@ -6,7 +6,7 @@ from wagon_common.helpers.subprocess import run_command
 
 import os
 
-from colorama import Fore, Style
+from wagon_common.helpers.output import blue
 
 
 def clone_repo(source, destination, verbose=False):
@@ -63,19 +63,17 @@ def fetch_repo(source, destination, verbose=False):
 
         if verbose:
 
-            print(Fore.BLUE + "\nClone repo"
-                  + Style.RESET_ALL
-                  + f"\n- source: {source}"
-                  + f"\n- destination: {destination}")
+            blue("\nClone repo",
+                 f"\n- source: {source}"
+                 + f"\n- destination: {destination}")
 
         # clone repo
         return clone_repo(source, destination, verbose=verbose)
 
     if verbose:
 
-        print(Fore.BLUE + "\nFetch remote master"
-              + Style.RESET_ALL
-              + f"\n- destination: {destination}")
+        blue("\nFetch remote master",
+             f"\n- destination: {destination}")
 
     # clone repo
     return pull_remote(destination, verbose=verbose)

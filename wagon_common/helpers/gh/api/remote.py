@@ -4,11 +4,10 @@ gh api remote cli helpers
 
 import requests
 
-from colorama import Fore, Style
 
 from wagon_common.helpers.git.remote import git_remote_get_url
-
 from wagon_common.helpers.gh.url import extract_gnn_repo_from_github_url
+from wagon_common.helpers.output import red
 
 
 def gh_get_params_from_remote(path, name, token):
@@ -36,10 +35,8 @@ def gh_get_params_from_remote(path, name, token):
 
     if response.status_code != 200:
 
-        print(Fore.RED
-              + "\nUnable to retrieve repository params 🤕"
-              + Style.RESET_ALL
-              + f"\n- response: {response.content}")
+        red("\nUnable to retrieve repository params 🤕",
+            f"\n- response: {response.content}")
 
     # retrieve repo data
     data = response.json()

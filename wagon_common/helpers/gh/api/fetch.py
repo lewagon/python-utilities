@@ -1,7 +1,7 @@
 
 import requests
 
-from colorama import Fore, Style
+from wagon_common.helpers.output import red, green
 
 
 def fetch_repos(org, token):
@@ -9,10 +9,8 @@ def fetch_repos(org, token):
     fetch org repos
     """
 
-    print(Fore.GREEN
-          + "\nFetch repos"
-          + Style.RESET_ALL
-          + f"\n- org: {org}")
+    green("\nFetch repos",
+          f"\n- org: {org}")
 
     # build url
     url = f"https://api.github.com/orgs/{org}/repos"
@@ -43,10 +41,8 @@ def fetch_repos(org, token):
 
         if response.status_code != 200:
 
-            print(Fore.RED
-                  + "\nUnable to retrieve repositories 🤕"
-                  + Style.RESET_ALL
-                  + f"\n- response: {response.content}")
+            red("\nUnable to retrieve repositories 🤕",
+                f"\n- response: {response.content}")
 
         # retrieve repos
         page_repos = response.json()

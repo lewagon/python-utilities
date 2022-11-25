@@ -8,7 +8,7 @@ from wagon_common.helpers.output import print_files
 
 import os
 
-from colorama import Fore, Style
+from wagon_common.helpers.output import red, blue
 
 
 class PublicationCommand:
@@ -23,20 +23,16 @@ class PublicationCommand:
             scope.repo.tld, target_tld))
 
         if verbose:
-            print(Fore.BLUE
-                  + "\nResolved target tld:"
-                  + Style.RESET_ALL
-                  + f"\n- source repo tld: {scope.repo.tld}"
-                  + f"\n- target tld: {target_tld}"
-                  + f"\n- resolved target tld: {abs_target_tld}")
+            blue("\nResolved target tld:",
+                 f"\n- source repo tld: {scope.repo.tld}"
+                 + f"\n- target tld: {target_tld}"
+                 + f"\n- resolved target tld: {abs_target_tld}")
 
         if verbose:
-            print(Fore.BLUE
-                  + "\nProcess files:"
-                  + Style.RESET_ALL
-                  + f"\n- from cwd: {scope.cwd}"
-                  + f"\n- command root: {command_root}"
-                  + f"\n- target root: {target_root}")
+            blue("\nProcess files:",
+                 f"\n- from cwd: {scope.cwd}"
+                 + f"\n- command root: {command_root}"
+                 + f"\n- target root: {target_root}")
 
         # iterate through scope files
         for source in scope:
@@ -89,11 +85,9 @@ class PublicationCommand:
 
             if processed_source[:2] == "..":
 
-                print(Fore.RED
-                      + "\nFile in scope outside of provided command root 🤕"
-                      + Style.RESET_ALL
-                      + f"\n- source file: {processed_source}"
-                      + f"\n- command root: {command_root}")
+                red("\nFile in scope outside of provided command root 🤕",
+                    f"\n- source file: {processed_source}"
+                    + f"\n- command root: {command_root}")
 
                 raise Exception("File in scope outside of repo")
 
