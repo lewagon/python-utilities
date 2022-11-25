@@ -1,12 +1,12 @@
 
-# 0.2.9 (2022-11-16)
+# 0.2.10 (2022-11-25)
 
 ### Added
 
 - Adds `GitRepo` and `GhRepo` helper classes
 - Adds tests for the `GhRepo` class
 
-# 0.2.8 (2022-11-07)
+# 0.2.9 (2022-11-25)
 
 ### Added
 
@@ -16,6 +16,13 @@
 ### Updated
 
 - Update `run_command` to print command output progressively (used in order to display remote command output when calling `gcloud compute ssh ...`)
+
+# 0.2.8 (2022-11-25)
+
+### Updated
+
+- Updates `are_directories_identical` to add a parameter to ignore a list of patterns
+- Updates `resolve_scope` to add a parameter to return the list of inexisting sources passed as parameter
 
 # 0.2.7 (2022-10-20)
 
