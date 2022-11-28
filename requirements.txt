@@ -1,3 +1,5 @@
 colorama
 pylint
 pytest
+python-dotenv
+requests

@@ -36,6 +36,16 @@ def cyan(text, desc=""): print(Fore.CYAN + text + Style.RESET_ALL + desc)
 def white(text, desc=""): print(Fore.WHITE + text + Style.RESET_ALL + desc)
 
 
+def subblack(text): return Fore.BLACK + text + Style.RESET_ALL
+def subred(text): return Fore.RED + text + Style.RESET_ALL
+def subgreen(text): return Fore.GREEN + text + Style.RESET_ALL
+def subyellow(text): return Fore.YELLOW + text + Style.RESET_ALL
+def subblue(text): return Fore.BLUE + text + Style.RESET_ALL
+def submagenta(text): return Fore.MAGENTA + text + Style.RESET_ALL
+def subcyan(text): return Fore.CYAN + text + Style.RESET_ALL
+def subwhite(text): return Fore.WHITE + text + Style.RESET_ALL
+
+
 if __name__ == '__main__':
     black("text")
     red("text")
