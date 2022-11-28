@@ -7,6 +7,8 @@
 - Adds tests for the `GhRepo` class
 - Adds `subblack`, `subred`, `subgreen`, `subyellow`, `subblue`, `submagenta`, `subcyan`, and `subwhite` helpers for `colorama`
 
+# 0.2.9 (2022-11-25)
+
 ### Added
 
 - Adds `manage_command` command subprocess helper handling output for `run_command`
