@@ -7,6 +7,10 @@
 - Adds tests for the `GhRepo` class
 - Adds `subblack`, `subred`, `subgreen`, `subyellow`, `subblue`, `submagenta`, `subcyan`, and `subwhite` helpers for `colorama`
 
+### Updated
+
+- Updates `GitHubRepo` constructor params (`username` removed)
+
 # 0.2.9 (2022-11-25)
 
 ### Added
