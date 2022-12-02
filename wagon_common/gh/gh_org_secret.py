@@ -2,6 +2,8 @@
 from wagon_common.gh.gh_api_base import GhApiBase
 from wagon_common.gh.gh_repo import GhRepo
 
+from wagon_common.helpers.output import cyan
+
 import requests
 
 
@@ -31,6 +33,9 @@ class GhOrgSecret(GhApiBase):
         list org secret repositories
         """
 
+        if self.verbose:
+            cyan(f"\nApi call: get org secret `{self.name}` repositories")
+
         params = dict(
             org=self.org,
             secret_name=self.name)
@@ -54,6 +59,9 @@ class GhOrgSecret(GhApiBase):
         """
         add repo to org secret
         """
+
+        if self.verbose:
+            cyan(f"\nApi call: add repo `{repository_id}` to org secret `{self.name}`")
 
         params = {}
 
