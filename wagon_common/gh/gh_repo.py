@@ -54,6 +54,9 @@ class GhRepo(GhApiBase):
         create repo
         """
 
+        if self.verbose:
+            cyan(f"\nApi call: create repo `{self.name}`")
+
         params["org"] = self.owner
         params["name"] = self.repo
         params["private"] = True
@@ -74,6 +77,9 @@ class GhRepo(GhApiBase):
         """
         get repo
         """
+
+        if self.verbose:
+            cyan(f"\nApi call: get repo `{self.name}`")
 
         request = dict(
             url=f"{self.base_url}/repos/{self.owner}/{self.repo}",
@@ -96,6 +102,9 @@ class GhRepo(GhApiBase):
         update repo
         """
 
+        if self.verbose:
+            cyan(f"\nApi call: update repo `{self.name}`")
+
         request = dict(
             url=f"{self.base_url}/repos/{self.owner}/{self.repo}",
             headers=self.headers,
@@ -116,6 +125,9 @@ class GhRepo(GhApiBase):
         # protect production repositories
         if self.owner.lower() not in ["lewagon-test", "lewagon-qa"]:
             raise NameError(f"cannot delete repo in {self.owner} production organisation")
+
+        if self.verbose:
+            cyan(f"\nApi call: delete repo `{self.name}`")
 
         if dry_run:
             cyan(f"\nDRY RUN: do not delete repo {self.name}")
@@ -138,12 +150,15 @@ class GhRepo(GhApiBase):
         delete reference (branch)
         """
 
+        if branch:
+            ref = f"heads/{ref}"
+
+        if self.verbose:
+            cyan(f"\nApi call: delete repo `{self.name}` reference {ref}")
+
         if dry_run:
             cyan(f"\nDRY RUN: do not delete repo {self.name} reference {ref}")
             return {}
-
-        if branch:
-            ref = f"heads/{ref}"
 
         # delete reference
         request = dict(

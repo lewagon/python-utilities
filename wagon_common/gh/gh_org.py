@@ -2,6 +2,8 @@
 from wagon_common.gh.gh_api_base import GhApiBase
 from wagon_common.gh.gh_org_secret import GhOrgSecret
 
+from wagon_common.helpers.output import cyan
+
 import requests
 
 
@@ -24,6 +26,9 @@ class GhOrg(GhApiBase):
         """
         list org secrets
         """
+
+        if self.verbose:
+            cyan(f"\nApi call: get org {self.org} secrets")
 
         params = dict(
             org=self.org)
