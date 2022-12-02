@@ -130,7 +130,7 @@ class GhRepo(GhApiBase):
             cyan(f"\nApi call: delete repo `{self.name}`")
 
         if dry_run:
-            cyan(f"\nDRY RUN: do not delete repo {self.name}")
+            cyan(f"\nDRY RUN: do not delete repo `{self.name}`")
             return {}
 
         # delete repo
@@ -156,10 +156,10 @@ class GhRepo(GhApiBase):
             ref = f"heads/{ref}"
 
         if self.verbose:
-            cyan(f"\nApi call: delete repo `{self.name}` reference {ref}")
+            cyan(f"\nApi call: delete repo `{self.name}` reference `{ref}`")
 
         if dry_run:
-            cyan(f"\nDRY RUN: do not delete repo {self.name} reference {ref}")
+            cyan(f"\nDRY RUN: do not delete repo `{self.name}` reference `{ref}`")
             return {}
 
         # delete reference

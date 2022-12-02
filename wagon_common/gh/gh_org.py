@@ -28,7 +28,7 @@ class GhOrg(GhApiBase):
         """
 
         if self.verbose:
-            cyan(f"\nApi call: get org {self.org} secrets")
+            cyan(f"\nApi call: get org `{self.org}` secrets")
 
         params = dict(
             org=self.org)

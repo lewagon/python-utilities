@@ -61,7 +61,7 @@ class GhOrgSecret(GhApiBase):
         """
 
         if self.verbose:
-            cyan(f"\nApi call: add repo {repository_id} to org secret `{self.name}`")
+            cyan(f"\nApi call: add repo `{repository_id}` to org secret `{self.name}`")
 
         params = {}
 
