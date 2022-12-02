@@ -1,6 +1,6 @@
 
 from wagon_common.gh.gh_api_base import GhApiBase
-from wagon_common.helpers.output import green, cyan
+from wagon_common.helpers.output import green, cyan, black
 
 import requests
 
@@ -142,7 +142,9 @@ class GhRepo(GhApiBase):
         response = requests.delete(**request)
 
         # checking whether repo was deleted or did not exist
-        if response.status_code != 204 and response.status_code != 404:
+        if response.status_code == 404:
+            black(f"\nRepo `{self.name}` does not exist 🙌")
+        elif response.status_code != 204 and response.status_code != 404:
             self.error(request, response, "repo delete")
 
     def delete_ref(self, ref, branch=True, dry_run=True):
@@ -168,7 +170,9 @@ class GhRepo(GhApiBase):
         response = requests.delete(**request)
 
         # checking whether ref was deleted or did not exist
-        if response.status_code != 204 and response.status_code != 422:
+        if response.status_code == 422:
+            black(f"\nRepo `{self.name}` reference {ref} does not exist 🙌")
+        elif response.status_code != 204 and response.status_code != 422:
             self.error(request, response, "ref delete")
 
     def wait_for_creation(self):
