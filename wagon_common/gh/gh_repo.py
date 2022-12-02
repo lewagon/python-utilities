@@ -133,7 +133,7 @@ class GhRepo(GhApiBase):
         if response.status_code != 204 and response.status_code != 404:
             self.error(request, response, "repo delete")
 
-    def delete_ref(self, ref, dry_run=True):
+    def delete_ref(self, ref, branch=True, dry_run=True):
         """
         delete reference (branch)
         """
@@ -141,6 +141,9 @@ class GhRepo(GhApiBase):
         if dry_run:
             cyan(f"\nDRY RUN: do not delete repo {self.name} reference {ref}")
             return {}
+
+        if branch:
+            ref = f"heads/{ref}"
 
         # delete reference
         request = dict(
