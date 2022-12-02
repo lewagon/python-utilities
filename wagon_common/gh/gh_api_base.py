@@ -26,8 +26,8 @@ class GhApiBase:
         """
 
         red(f"\nGH api error in {context} 🤕",
-            f"\n- url: {request['url']}"
-            + f"\n- params: {request['json']}"
+            f"\n- url: {request['url'] if 'url' in request else ''}"
+            + f"\n- params: {request['json'] if 'json' in request else ''}"
             + f"\n- status code: {response.status_code}"
             + f"\n- response: {response.content}")
 
