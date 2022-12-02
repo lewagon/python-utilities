@@ -1,4 +1,10 @@
 
+# 0.2.11 (2022-12-02)
+
+### Added
+
+- Adds `GhRepo` `delete_ref` method
+
 # 0.2.10 (2022-11-25)
 
 ### Added
