@@ -153,7 +153,7 @@ class GhRepo(GhApiBase):
         response = requests.delete(**request)
 
         # checking whether ref was deleted or did not exist
-        if response.status_code != 204 and response.status_code != 404:
+        if response.status_code != 204 and response.status_code != 422:
             self.error(request, response, "ref delete")
 
     def wait_for_creation(self):
