@@ -39,7 +39,11 @@ def get_git_top_level_directory(verbose=False, path=None):
     return top_level_directory
 
 def git_rm_and_clean(path=None, verbose=False):
-    """ run git rm -rf . and git clean -fdx in `path` """
+    """
+    reset the content of the git repository at given `path` :
+    - remove content from the index using `git rm -rf`
+    - remove untracked files using `git clean -fdx`
+    """
     # check path
     if path and not os.path.isdir(path):
         path = os.path.dirname(os.path.abspath(path))
