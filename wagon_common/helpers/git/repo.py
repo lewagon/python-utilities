@@ -38,6 +38,49 @@ def get_git_top_level_directory(verbose=False, path=None):
 
     return top_level_directory
 
+def git_rm_and_clean(path=None, verbose=False):
+    """ run git rm -rf . and git clean -fdx in `path` """
+    # check path
+    if path and not os.path.isdir(path):
+        path = os.path.dirname(os.path.abspath(path))
+
+        # verify path
+        if not os.path.isdir(path):
+            return None
+
+    rm_command = [
+      "git",
+      "rm",
+      "-rf",
+      "."
+    ]
+
+    rc, output, _error = run_command(rm_command, cwd=path, verbose=verbose)
+
+    if rc != 0:
+        print(_error.decode("utf-8"))
+        return None
+
+    if verbose:
+        print(output.decode("utf-8"))
+
+    clean_command = [
+      "git",
+      "clean",
+      "-fdx"
+    ]
+
+    rc2, output2, _error2 = run_command(clean_command, cwd=path, verbose=verbose)
+
+    if rc2 != 0:
+        print(_error2.decode("utf-8"))
+        return None
+
+    if verbose:
+        print(output2.decode("utf-8"))
+
+    return True
+
 
 if __name__ == '__main__':
 
