@@ -48,10 +48,6 @@ def git_rm_and_clean(path=None, verbose=False):
     if path and not os.path.isdir(path):
         path = os.path.dirname(os.path.abspath(path))
 
-        # verify path
-        if not os.path.isdir(path):
-            return None
-
     rm_command = [
       "git",
       "rm",
