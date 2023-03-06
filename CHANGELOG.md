@@ -1,4 +1,10 @@
 
+# 0.2.12 (2023-03-06)
+
+### Added
+
+- Adds `git_rm_and_clean` function to wipe git repository content (everything but `.git` dir)
+
 # 0.2.11 (2022-12-02)
 
 ### Added
