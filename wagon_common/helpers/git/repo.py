@@ -44,6 +44,7 @@ def git_rm_and_clean(path=None, verbose=False):
     - remove content from the index using `git rm -rf`
     - remove untracked files using `git clean -fdx`
     """
+
     # check path
     if path and not os.path.isdir(path):
         path = os.path.dirname(os.path.abspath(path))
