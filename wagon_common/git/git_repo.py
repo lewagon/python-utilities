@@ -44,6 +44,41 @@ class GitRepo:
 
         return tld
 
+    @cached_property
+    def default_remote(self):
+        """
+        retrieves first listed remote
+        """
+
+        remotes = self.__command(
+            "Retrieve default remote",
+            [
+                "git",
+                "remote"
+            ])
+
+        return remotes.split()[0]
+
+    @cached_property
+    def default_branch(self, remote=None):
+
+        if remote is None:
+            remote = self.default_remote
+
+        info = self.__command(
+            "Retrieve default remote",
+            [
+                "git",
+                "remote",
+                "show",
+                remote
+            ])
+
+        head_branch = [line for line in info.split("\n") if "HEAD branch: " in line][0]
+        head_branch = head_branch.strip()[len("HEAD branch: "):]
+
+        return head_branch
+
     def clone(self, url: Union[str, GhRepo], quiet=False):
 
         if isinstance(url, GhRepo):
@@ -128,7 +163,13 @@ class GitRepo:
                 f"error: remote {remote} already exists"
             ])
 
-    def push(self, remote: str = "origin", branch="master", force=False):
+    def push(self, remote: str = None, branch=None, force=False):
+
+        if remote is None:
+            remote = self.default_remote
+
+        if branch is None:
+            branch = self.default_branch
 
         return self.__command(
             "Push commits",
