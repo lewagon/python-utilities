@@ -125,7 +125,7 @@ class GitRepo:
                 url
             ],
             [
-                "error: remote origin already exists"
+                f"error: remote {remote} already exists"
             ])
 
     def push(self, remote: str = "origin", branch="master", force=False):
