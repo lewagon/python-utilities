@@ -66,7 +66,7 @@ class GitRepo:
             remote = self.default_remote
 
         info = self.__command(
-            "Retrieve default remote",
+            "Retrieve default branch",
             [
                 "git",
                 "remote",
