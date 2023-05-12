@@ -59,23 +59,15 @@ class GitRepo:
 
         return remotes.split()[0]
 
-    @cached_property
-    def default_branch(self, remote=None):
+    def current_branch(self):
 
-        if remote is None:
-            remote = self.default_remote
-
-        info = self.__command(
-            "Retrieve default branch",
+        head_branch = self.__command(
+            "Retrieve current branch",
             [
                 "git",
-                "remote",
-                "show",
-                remote
+                "branch",
+                "--show-current"
             ])
-
-        head_branch = [line for line in info.split("\n") if "HEAD branch: " in line][0]
-        head_branch = head_branch.strip()[len("HEAD branch: "):]
 
         return head_branch
 
@@ -169,7 +161,7 @@ class GitRepo:
             remote = self.default_remote
 
         if branch is None:
-            branch = self.default_branch
+            branch = self.current_branch()
 
         return self.__command(
             "Push commits",
