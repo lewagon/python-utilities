@@ -1,4 +1,10 @@
 
+# 0.2.13 (2023-05-11)
+
+### Added
+
+- Adds `GitRepo` `default_remote` and `default_branch` cached properties
+
 # 0.2.12 (2023-03-06)
 
 ### Added
