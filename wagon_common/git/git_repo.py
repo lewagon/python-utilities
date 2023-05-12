@@ -44,7 +44,6 @@ class GitRepo:
 
         return tld
 
-    @cached_property
     def default_remote(self):
         """
         retrieves first listed remote
