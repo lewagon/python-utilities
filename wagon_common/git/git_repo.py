@@ -47,6 +47,7 @@ class GitRepo:
     def default_remote(self):
         """
         retrieves first listed remote
+        the rabbit hole is avoided by considering only simple use cases
         """
 
         remotes = self.__command(
