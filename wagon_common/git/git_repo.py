@@ -48,6 +48,7 @@ class GitRepo:
     def default_remote(self):
         """
         retrieves first listed remote
+        simplified version matching our use cases to avoid the rabbit hole
         """
 
         remotes = self.__command(
@@ -61,6 +62,9 @@ class GitRepo:
 
     @cached_property
     def default_branch(self, remote=None):
+        """
+        simplified version matching our use cases to avoid the rabbit hole
+        """
 
         if remote is None:
             remote = self.default_remote
