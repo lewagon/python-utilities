@@ -1,4 +1,10 @@
 
+# 0.2.14 (2023-05-17)
+
+### Added
+
+- Adds `GitRepo` `config_user_name` and `config_user_email` methods
+
 # 0.2.13 (2023-05-11)
 
 ### Added
