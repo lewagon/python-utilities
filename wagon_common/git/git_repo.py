@@ -114,6 +114,30 @@ class GitRepo:
                 initial_branch
             ])
 
+    def config_user_name(self, user_name="github-actions"):
+
+        return self.__command(
+            "Configure globally the git user name",
+            [
+                "git",
+                "config",
+                "--global",
+                "user.name",
+                user_name
+            ])
+
+    def config_user_email(self, user_email="github-actions@github.com"):
+
+        return self.__command(
+            "Configure globally the git user email",
+            [
+                "git",
+                "config",
+                "--global",
+                "user.email",
+                user_email
+            ])
+
     def add(self):
 
         return self.__command(
