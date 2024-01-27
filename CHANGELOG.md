@@ -1,4 +1,10 @@
 
+# 0.2.15 (2024-01-27)
+
+### Added
+
+- Adds option in `run_command` to print stderror
+
 # 0.2.14 (2023-05-17)
 
 ### Added

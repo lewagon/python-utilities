@@ -4,7 +4,7 @@ from wagon_common.helpers.output import red, green, magenta
 import subprocess
 
 
-def run_command(command, cwd=None, input_bytes=None, show_progress=False, verbose=False):
+def run_command(command, cwd=None, input_bytes=None, show_progress=False, show_errors=False, verbose=False):
     """
     Executes a command in a subprocess
     command - a terminal command as a list, ex. ['cp', 'file', 'folder']
@@ -31,6 +31,14 @@ def run_command(command, cwd=None, input_bytes=None, show_progress=False, verbos
         for line in p.stdout:
             decoded_line = line.decode("utf-8")
             output += decoded_line
+            print(decoded_line, end="")
+
+    # show command error as it runs
+    errors = ""
+    if show_errors:
+        for line in p.stderr:
+            decoded_line = line.decode("utf-8")
+            errors += decoded_line
             print(decoded_line, end="")
 
     # validate input
