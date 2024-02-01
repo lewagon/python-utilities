@@ -54,14 +54,14 @@ def run_command(command, cwd=None, input_bytes=None, show_progress=False, show_e
     return rc, output.encode() + com_output, error
 
 
-def manage_command(desc, command, valid_errors=[], cwd=None, show_progress=False, verbose=False):
+def manage_command(desc, command, valid_errors=[], cwd=None, show_progress=False, show_errors=False, verbose=False):
     """
     run command in subprocess and return output
     """
 
     green(f"\n{desc}")
 
-    rc, raw_output, error = run_command(command, cwd=cwd, show_progress=show_progress, verbose=verbose)
+    rc, raw_output, error = run_command(command, cwd=cwd, show_progress=show_progress, show_errors=show_errors, verbose=verbose)
 
     output = raw_output.decode("utf-8")
 
