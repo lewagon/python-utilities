@@ -3,7 +3,7 @@
 
 ### Added
 
-- Adds option in `run_command` to print stderror
+- Adds option in `run_command` and `manage_command` to print stderror
 
 # 0.2.14 (2023-05-17)
 
