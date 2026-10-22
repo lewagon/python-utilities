@@ -27,7 +27,7 @@ class GhRepo(GhApiBase):
 
         self.name, self.owner, self.repo = self.__identify(name)
         self.ssh_url = f"git@github.com:{self.owner}/{self.repo}.git"
-        self.https_url = f"https://{token}@github.com/{self.owner}/{self.repo}.git"
+        self.https_url = f"https://x-access-token:{token}@github.com/{self.owner}/{self.repo}.git"
         self.is_org = is_org
         self.kwargs = kwargs
 

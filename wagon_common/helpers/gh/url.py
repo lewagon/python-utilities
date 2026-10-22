@@ -68,13 +68,15 @@ def github_url(fullname, token=None):
     build gh repo url
     formats:
     - https://github.com/{org}/{repo}
-    - https://{token}@github.com/{org}/{repo}
+    - https://x-access-token:{token}@github.com/{org}/{repo}
     # - https://git@github.com/{org}/{repo}
     # - https://{username}@github.com/{org}/{repo}
     # - https://{username}:{token}@github.com/{org}/{repo}
     """
 
-    auth = f"{token}@" if token is not None else ""
+    # the token is passed as the password: recent libcurl does not re-send
+    # credentials after a redirect for urls with a username and no password
+    auth = f"x-access-token:{token}@" if token is not None else ""
 
     repo_url = f"https://{auth}github.com/{fullname}"
 

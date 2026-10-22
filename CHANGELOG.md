@@ -1,4 +1,10 @@
 
+# 0.2.16 (2026-10-22)
+
+### Fixed
+
+- Passes the token as the password in authenticated GitHub urls (`https://x-access-token:{token}@github.com/...`), recent libcurl no longer re-sends credentials after a redirect for urls with a username and no password
+
 # 0.2.15 (2025-01-27)
 
 ### Updated

@@ -80,6 +80,6 @@ class TestGitHubRepo():
         # Act
 
         # Assert
-        assert authed_data_so.url == "https://token@github.com/lewagon/data-solutions"
+        assert authed_data_so.url == "https://x-access-token:token@github.com/lewagon/data-solutions"
 
         # Cleanup
